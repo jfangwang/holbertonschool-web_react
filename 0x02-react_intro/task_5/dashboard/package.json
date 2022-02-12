@@ -32,5 +32,12 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "^5.0.0"
+  },
+  "jest": {
+    "setupFiles": ["<rootDir>/config/setupTests.js"],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/mocks/styleMock.js",
+      "\\.(jpg|png)$": "<rootDir>/mocks/fileMock.js"
+    }
   }
 }
