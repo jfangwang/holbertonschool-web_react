@@ -1,1 +1,0 @@
-This project directory was made without 'create-react-app'.
