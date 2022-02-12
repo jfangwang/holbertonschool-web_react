@@ -1,19 +1,21 @@
-import React from 'react';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import App from './App';
 
 describe('App Test Suite', () => {
-    it('TestGetFullYear', () => {
-      expect(getFullYear()).toBe(new Date().getFullYear());
+    it('Test App renders without crashing', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.exists());
     });
-    it('TestGetFooterCopyTrue', () => {
-        expect(getFooterCopy(true)).toEqual("Holberton School");
+    it('Test verify that App renders a div with the class App-header', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.find('div.App-header')).toHaveLength(1);
     });
-    it('TestGetFooterCopyFalse', () => {
-        expect(getFooterCopy(false)).toEqual("Holberton Schoool main dashboard");
+    it('Testverify that App renders a div with the class App-body', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.find('div.App-body')).toHaveLength(1);
     });
-    it('TestGetLatestNotification', () => {
-        expect(getLatestNotification()).toEqual("<strong>Urgent requirement</strong> - complete by EOD");
+    it('Testverify that App renders a div with the class App-footer', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.find('div.App-footer')).toHaveLength(1);
     });
   });

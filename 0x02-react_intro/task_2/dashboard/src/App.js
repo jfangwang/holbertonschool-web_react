@@ -5,10 +5,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <img src={logo} className="App-logo" alt="holberton logo" />
         <h1>School Dashboard</h1>
-      </header>
+      </div>
       <div className="App-body">
         <p>Login to access the full dashboard</p>
         <label for="email">Email</label>
@@ -17,9 +17,9 @@ function App() {
         <input id="password" type="password"/>
         <button id="ok_button">OK</button>
       </div>
-      <footer className="App-footer">
+      <div className="App-footer">
         <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
-      </footer>
+      </div>
     </div>
   );
 }
