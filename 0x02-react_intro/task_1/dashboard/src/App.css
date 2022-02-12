@@ -1,0 +1,37 @@
+:root {
+  --red: red;
+}
+
+.App {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.App > div {
+  width:100%;
+  margin: 0;
+  font-family: sans-serif;
+  display:flex;
+}
+.App-header {
+  justify-content: left;
+  align-items: center;
+  color: var(--red);
+  flex-direction: row;
+  text-align: center;
+  height: 25vh;
+}
+.App-logo {
+  height: 25vh;
+}
+.App-body {
+  border-bottom: var(--red) 4px solid;
+  border-top: var(--red) 4px solid;
+  height: 50vh;
+  text-align: left;
+  padding: 5vh;
+}
+.App-footer {
+  justify-content: center;
+  font-style: italic;
+}
