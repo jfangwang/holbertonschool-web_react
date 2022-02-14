@@ -1,0 +1,14 @@
+import React from 'react'
+import PropTypes from 'prop-types';
+
+export default function NotificationItem({type, html, value}) {
+    if (html === undefined) {
+        return(<li data-priority={type}>{value}</li>)
+    }
+    return(<li data-priority={type} dangerouslySetInnerHTML={html}>{value}</li>)
+    NotificationItem.propTypes = {
+        type: PropTypes.string.isRequired,
+        html: PropTypes.object,
+        value: PropTypes.string
+    }
+}

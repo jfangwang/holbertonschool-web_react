@@ -1,0 +1,14 @@
+:root {
+  --red: red;
+}
+.App-body {
+  border-bottom: var(--red) 4px solid;
+  border-top: var(--red) 4px solid;
+  height: 50vh;
+  text-align: left;
+  padding: 5vh;
+  flex-direction: column;
+}
+.App-body > label{
+  padding: 8px 4px 8px 4px;
+}
