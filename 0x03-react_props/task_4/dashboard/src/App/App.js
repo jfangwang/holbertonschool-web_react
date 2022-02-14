@@ -13,15 +13,15 @@ function App({isLoggedIn}) {
   return (
     /* Short Hand version of <React.Fragment> */
     <>
-      <div id='root-notifications'>
-        <Notifications />
-      </div>
+      <Notifications />
       <div className="App">
         <Header/>
         <div className="App-body">
           {isLoggedIn ? <CourseList /> : <Login/>}
         </div>
-        <Footer/>
+        <div className="App-foooter">
+          <Footer/>
+        </div>
       </div>
     </>
   );
