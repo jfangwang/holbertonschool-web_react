@@ -1,0 +1,14 @@
+:root {
+  --red: red;
+}
+.App-logo {
+  height: 25vh;
+}
+
+.App-header {
+  justify-content: left;
+  align-items: center;
+  color: var(--red);
+  flex-direction: row;
+  text-align: center;
+}
