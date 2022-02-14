@@ -3,14 +3,14 @@ import { shallow } from "enzyme";
 import CourseListRow from "./CourseListRow";
 
 describe("CourseListRow Test Suite", () => {
-    it("Header is True", () => {
-        const wrapper = shallow(<CourseListRow/>)
+    it("CourseListRow Renders", () => {
+        const wrapper = shallow(<CourseListRow textFirstCell="Test"/>);
         expect(wrapper.exists()).toEqual(true);
     });
     it("Header is True", () => {
         const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Test"/>);
         const tr = wrapper.find('tr');
-        expect(tr.children()).toHaveLength(1);
+        expect(tr.find('th')).toHaveLength(1);
         expect(tr.find('th').prop('colSpan')).toEqual('2');
     });
     it("Header is False", () => {

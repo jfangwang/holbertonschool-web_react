@@ -25,12 +25,12 @@ function App({isLoggedIn}) {
       </div>
     </>
   );
-  App.propTypes = {
-    isLoggedIn: PropTypes.bool
-  }
-  App.defaultProps = {
-    isLoggedIn: false
-  }
+}
+App.propTypes = {
+  isLoggedIn: PropTypes.bool
+}
+App.defaultProps = {
+  isLoggedIn: false
 }
 
 export default App;

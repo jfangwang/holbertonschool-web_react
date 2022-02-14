@@ -5,8 +5,8 @@ export default function CourseListRow({isHeader, textFirstCell, textSecondCell})
 
   let body = null;
 
-  if (isHeader) {
-    if (textSecondCell === undefined) {
+  if (isHeader === true) {
+    if (textSecondCell === null) {
       body = <th colSpan="2">{textFirstCell}</th>
     } else {
       body = <><th colSpan="2">{textFirstCell}</th><th colSpan="2">{textSecondCell}</th></>
@@ -16,14 +16,13 @@ export default function CourseListRow({isHeader, textFirstCell, textSecondCell})
   }
 
   return(<tr>{body}</tr>)
-
-  CourseListRow.defaultProps = {
-    isHeader: false,
-    textSecondCell: null 
-  }
-  CourseListRow.propTypes = {
-    isHeader: PropTypes.bool,
-    textFirstCell: PropTypes.string.isRequired,
-    textSecondCell: PropTypes.string
-  }
+}
+CourseListRow.defaultProps = {
+  isHeader: false,
+  textSecondCell: null 
+}
+CourseListRow.propTypes = {
+  isHeader: PropTypes.bool,
+  textFirstCell: PropTypes.string.isRequired,
+  textSecondCell: PropTypes.string
 }

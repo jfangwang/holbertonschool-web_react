@@ -32,12 +32,13 @@ const Notifications = ({displayDrawer}) => {
             {displayDrawer && showNotifications}
         </>
     );
-    Notifications.defaultProps = {
-        displayDrawer: false
-    }
-    Notifications.propTypes = {
-        displayDrawer: PropTypes.bool
-    }
+    
 };
+Notifications.defaultProps = {
+    displayDrawer: false
+}
+Notifications.propTypes = {
+    displayDrawer: PropTypes.bool
+}
 
 export default Notifications;
