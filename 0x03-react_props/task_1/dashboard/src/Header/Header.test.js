@@ -2,9 +2,14 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Header from './Header';
 
-describe('App Test Suite', () => {
-    it('Test App renders without crashing', () => {
+describe('Header Test Suite', () => {
+    it('Header renders without crashing', () => {
       const wrapper = shallow(<Header/>);
       expect(wrapper.exists());
+    });
+    it('Can find img tag with app-loge class', () => {
+      const wrapper = shallow(<Header/>);
+      expect(wrapper.find('img')).toHaveLength(1);
+      expect(wrapper.find('h1')).toHaveLength(1);
     });
   });

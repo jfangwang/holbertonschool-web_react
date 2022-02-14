@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Footer from './Footer';
 
-describe('App Test Suite', () => {
-    it('Test App renders without crashing', () => {
+describe('Footer Test Suite', () => {
+    it('Footer renders without crashing', () => {
       const wrapper = shallow(<Footer/>);
       expect(wrapper.exists());
     });
-    it('Testverify that App renders a div with the class App-footer', () => {
+    it('Check if Footer contains text: Copyright', () => {
       const wrapper = shallow(<Footer/>);
-      expect(wrapper.find('div.App-footer')).toHaveLength(1);
+      expect(wrapper.text()).toContain("Copyright");
     });
   });
