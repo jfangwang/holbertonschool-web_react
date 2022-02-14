@@ -29,7 +29,7 @@ const Notifications = ({displayDrawer}) => {
             <div className="menuItem">
                 <p>Your notifications</p>
             </div>
-            {displayDrawer ? showNotifications : undefined}
+            {displayDrawer && showNotifications}
         </>
     );
     Notifications.defaultProps = {

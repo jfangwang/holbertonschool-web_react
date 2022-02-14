@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
+import CourseList from '../CourseList/CourseList';
+import Login from '../Login/Login';
 
 describe('App Test Suite', () => {
     it('App renders without crashing', () => {
@@ -26,5 +28,14 @@ describe('App Test Suite', () => {
     it('Contains Footer Component', () => {
       const wrapper = shallow(<App/>);
       expect(wrapper.find('Footer')).toHaveLength(1);
+    });
+    it('CourseList is not displayed', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.find(CourseList)).toHaveLength(0);
+    });
+    it('CourseList is not displayed', () => {
+      const wrapper = shallow(<App isLoggedIn={true}/>);
+      expect(wrapper.find(Login)).toHaveLength(0);
+      expect(wrapper.find(CourseList)).toHaveLength(1);
     });
   });
