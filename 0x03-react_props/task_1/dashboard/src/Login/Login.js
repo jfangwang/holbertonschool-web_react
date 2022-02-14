@@ -3,7 +3,7 @@ import {getFullYear, getFooterCopy} from '../utils/utils';
 import logo from '../assets/Holberton_Logo.jpg';
 import './Login.css';
 
-function App() {
+export default function Login() {
   return (
     /* Short Hand version of <React.Fragment> */
     <>
@@ -16,5 +16,3 @@ function App() {
     </>
   );
 }
-
-export default App;
