@@ -9,6 +9,6 @@
 ul li[data-priority='default'] {
     color: blue;
 }
-ul li[data-priority='high'] {
+ul li[data-priority='urgent'] {
     color: red;
 }

@@ -17,9 +17,9 @@ const Notifications = () => {
                 <img style={{height:'15px', width:'15px'}} src={closeIcon} alt="closeIcon"></img>
             </button>
             <ul>
-                <NotificationItem data-priority='default'>New course available</NotificationItem>
-                <NotificationItem data-priority='high'>New resume available</NotificationItem>
-                <NotificationItem data-priority='high' html={{ __html: getLatestNotification() }}></NotificationItem>
+                <NotificationItem type='default' value='New course available'></NotificationItem>
+                <NotificationItem type='urgent' value='New resume available'></NotificationItem>
+                <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem>
             </ul>
         </div>
     );
