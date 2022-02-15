@@ -19,6 +19,7 @@ export default function CourseListRow({isHeader, textFirstCell, textSecondCell})
 }
 CourseListRow.defaultProps = {
   isHeader: false,
+  textFirstCell: null,
   textSecondCell: null 
 }
 CourseListRow.propTypes = {
