@@ -10,6 +10,7 @@
     padding-left: 1rem;
     padding-right: 6rem;
     justify-content: left;
+    z-index: 1;
 }
 .menuItem {
     position: absolute;
