@@ -8,9 +8,9 @@ export default function Login() {
     /* Short Hand version of <React.Fragment> */
     <>
       <p>Login to access the full dashboard</p>
-      <label for="email">Email</label>
+      <label htmlFor="email">Email</label>
       <input id="email" type="email"/>
-      <label for="password">Password</label>
+      <label htmlFor="password">Password</label>
       <input id="password" type="password"/>
       <button id="ok_button">OK</button>
     </>

@@ -11,7 +11,7 @@ const Notifications = ({displayDrawer}) => {
             <p>Here is the list of notifications</p>
             <button id="notification_button"
                     style={{height:'20px', width:'30px', outline:'none', border:'none',
-                        background:'transparent', padding:'none', position:'absolute', right:'10px'}}
+                        background:'transparent', padding:'none', position:'absolute', right:'10px', top: '10px'}}
                     aria-label="Close"
                     onClick={() => console.log("Close button has been clicked")}
                     >
