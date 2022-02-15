@@ -10,13 +10,11 @@
     "test": "jest",
     "test-watch": "jest --watch"
   },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
-  },
+  "keywords": [],
+  "author": "Jonny Wang",
+  "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.17.3",
+    "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
@@ -26,11 +24,16 @@
     "file-loader": "^6.2.0",
     "image-webpack-loader": "^8.1.0",
     "jest": "^27.5.1",
-    "prop-types": "^15.8.1",
     "style-loader": "^3.3.1",
-    "webpack": "^5.69.0",
+    "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "^5.0.0"
   },
   "jest": {
     "setupFiles": [
@@ -40,7 +43,5 @@
       "\\.(css)$": "<rootDir>/mocks/styleMock.js",
       "\\.(jpg|png)$": "<rootDir>/mocks/fileMock.js"
     }
-  },
-  "author": "Jonathan Wang",
-  "license": "ISC"
+  }
 }
