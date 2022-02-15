@@ -1,11 +1,11 @@
 import React from 'react';
 import './Notifications.css';
 import closeIcon from '../assets/closeIcon.png';
-import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
+import NotificationItemShape from './NotificationItemShape';
 import PropTypes from 'prop-types';
 
-const Notifications = ({displayDrawer}) => {
+const Notifications = ({displayDrawer, listNotifications}) => {
     const showNotifications = (<>
         <div className="Notifications">
             <p>Here is the list of notifications</p>
@@ -18,9 +18,10 @@ const Notifications = ({displayDrawer}) => {
                 <img style={{height:'15px', width:'15px'}} src={closeIcon} alt="closeIcon"></img>
             </button>
             <ul>
-                <NotificationItem type='default' value='New course available'></NotificationItem>
-                <NotificationItem type='urgent' value='New resume available'></NotificationItem>
-                <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem>
+                {listNotifications.length === 0 ? <NotificationItem type="default" value="No new notification for now" />:
+                listNotifications.map((item) => (
+                    <NotificationItem key={item.id} html={item.html} type={item.type} value={item.value} />
+                ))}
             </ul>
         </div>
     </>);
@@ -35,10 +36,12 @@ const Notifications = ({displayDrawer}) => {
     
 };
 Notifications.defaultProps = {
-    displayDrawer: false
+    displayDrawer: false,
+    listNotifications: [{id: 1, type: "default", value: "No new notification for now"}]
 }
 Notifications.propTypes = {
-    displayDrawer: PropTypes.bool
+    displayDrawer: PropTypes.bool,
+    listNotifications: PropTypes.arrayOf(NotificationItemShape)
 }
 
 export default Notifications;

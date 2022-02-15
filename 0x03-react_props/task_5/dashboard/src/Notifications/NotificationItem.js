@@ -8,7 +8,9 @@ export default function NotificationItem({type, html, value}) {
     return(<li data-priority={type} dangerouslySetInnerHTML={html}>{value}</li>)
 }
 NotificationItem.defaultProps = {
-    type: "default"
+    type: "default",
+    html: null,
+    value: null
 }
 NotificationItem.propTypes = {
     type: PropTypes.string.isRequired,
