@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 
 function App({isLoggedIn}) {
-  list = [
+  const courses = [
     {id: 1, name: "ES6", credit: 60},
     {id: 2, name: "Webpack", credit: 20},
     {id: 3, name: "React", credit: 40}
@@ -22,7 +22,7 @@ function App({isLoggedIn}) {
       <div className="App">
         <Header/>
         <div className="App-body">
-          {isLoggedIn ? <CourseList CourseList={list}/> : <Login/>}
+          {isLoggedIn ? <CourseList listCourses={courses}/> : <Login/>}
         </div>
         <div className="App-foooter">
           <Footer/>
