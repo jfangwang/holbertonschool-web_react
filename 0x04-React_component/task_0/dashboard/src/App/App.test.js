@@ -39,3 +39,4 @@ describe('App Test Suite', () => {
       expect(wrapper.find(CourseList)).toHaveLength(1);
     });
   });
+  
