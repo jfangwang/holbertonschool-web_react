@@ -12,6 +12,4 @@ function BodySectionWithMarginBottom({children}) {
 	)
 }
 
-BodySectionWithMarginBottom.propTypes = {}
-
 export default BodySectionWithMarginBottom

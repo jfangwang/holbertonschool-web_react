@@ -8,6 +8,8 @@ import CourseListRow from '../CourseList/CourseListRow';
 import CourseList from '../CourseList/CourseList';
 import PropTypes from 'prop-types';
 import { getLatestNotification } from '../utils/utils';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 const courses = [
   {id: 1, name: "ES6", credit: 60},
@@ -49,7 +51,18 @@ class App extends React.Component {
         <div className="App">
           <Header/>
           <div className="App-body">
-            {isLoggedIn ? <CourseList listCourses={courses}/> : <Login/>}
+            {isLoggedIn ?
+            <BodySectionWithMarginBottom title="Course list">
+            <CourseList listCourses={courses}/>
+            </BodySectionWithMarginBottom>
+            :
+            <BodySectionWithMarginBottom title="Log in to continue">
+            <Login/>
+            </BodySectionWithMarginBottom>
+            }
+            <BodySection title="News from the School">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </BodySection>
           </div>
           <div className="App-foooter">
             <Footer/>
