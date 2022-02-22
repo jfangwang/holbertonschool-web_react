@@ -4,10 +4,11 @@ import App from './App';
 import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
 
+
 describe('App Test Suite', () => {
     it('App renders without crashing', () => {
       const wrapper = shallow(<App/>);
-      expect(wrapper.exists());
+      // expect(wrapper.exists());
     });
     // it('Verify that App renders a div with the class App-body', () => {
     //   const wrapper = shallow(<App/>);
@@ -38,4 +39,16 @@ describe('App Test Suite', () => {
       expect(wrapper.find(Login)).toHaveLength(0);
       expect(wrapper.find(CourseList)).toHaveLength(1);
     });
+    it('Login true', () => {
+      const wrapper = shallow(<App isLoggedIn={true}/>);
+      expect(wrapper.find('Login')).toHaveLength(0);
+      expect(wrapper.find('CourseList')).toHaveLength(1);
+    })
+    it('logout works', () => {
+      const func = jest.fn(() => undefined);
+      const wrapper = shallow(<App logOut={func}/>);
+      const spy = jest.spyOn(global, 'alert')
+      expect(spy);
+      expect(func);
+    })
   });
