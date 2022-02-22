@@ -27,7 +27,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  logOut() {
+    alert("Logging you out")
+  }
+  componentDidMount() {
+    document.addEventListener('keypress', (event) => {
+      var name = event.key;
+      var code = event.code;
+      var ctrl = event.ctrlKey;
+      if (name === "h" && ctrl === true) {
+        logOut();
+        console.log("hi")
+      }
+    }, false);
+  }
 
   render() {
     const { isLoggedIn } = this.props;
