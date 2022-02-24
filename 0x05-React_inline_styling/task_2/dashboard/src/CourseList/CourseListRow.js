@@ -1,5 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  th: {
+    textAlign: 'left',
+    borderTop: '1px solid gray',
+    borderBottom: '1px solid gray',
+  },
+});
 
 export default function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
 
@@ -13,7 +22,8 @@ export default function CourseListRow({isHeader, textFirstCell, textSecondCell})
     if (textSecondCell === null) {
       body = <th style={bgcolor} colSpan="2">{textFirstCell}</th>
     } else {
-      body = <><th style={bgcolor} colSpan="2">{textFirstCell}</th><th style={bgcolor} colSpan="2">{textSecondCell}</th></>
+      body = <><th className={css(styles.th)} style={bgcolor} colSpan="2">{textFirstCell}</th>
+               <th className={css(styles.th)} style={bgcolor} colSpan="2">{textSecondCell}</th></>
     }
   } else {
     bgcolor = bgrow;
