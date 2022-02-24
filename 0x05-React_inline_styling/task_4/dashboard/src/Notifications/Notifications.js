@@ -8,6 +8,43 @@ import { StyleSheet, css } from 'aphrodite';
 const screenSize = {
   small: '@media screen and (max-width: 900px)',
 };
+const opacityKf = {
+  from: {
+    opacity: 0.5,
+  },
+
+  to: {
+    opacity: 1,
+  },
+};
+
+const translateYkf = {
+  '0%': {
+    transform: 'translateY(0)',
+  },
+
+  '50%': {
+    transform: 'translateY(-5px)',
+  },
+
+  '75%': {
+    transform: 'translateY(5px)',
+  },
+
+  '100%': {
+    transform: 'translateY(0)',
+  },
+};
+
+const borderKf = {
+  '0%': {
+    border: `3px dashed cyan`,
+  },
+
+  '100%': {
+    border: `3px dashed #e0344a`,
+  },
+};
 
 const styles = StyleSheet.create({
 	Notifications: {
@@ -22,7 +59,11 @@ const styles = StyleSheet.create({
 	  paddingRight: '6rem',
 	  justifyContent: 'left',
 	  zIndex: '1',
-		backgroundColor: 'white'
+		backgroundColor: 'white',
+		animationName: [borderKf],
+    animationDuration: '0.8s',
+    animationIterationCount: 1,
+    animationFillMode: 'forwards',
 	},
 	menuItem: {
 		position: 'absolute',
@@ -30,6 +71,12 @@ const styles = StyleSheet.create({
 		right: '0',
 		padding: '0',
 		marginRight: '1rem',
+		':hover': {
+      cursor: 'pointer',
+      animationName: [opacityKf, translateYkf],
+      animationDuration: '1s, 0.5s',
+      animationIterationCount: 3,
+    },
 	},
 	showOff: {
 		marginRight: '8px',
