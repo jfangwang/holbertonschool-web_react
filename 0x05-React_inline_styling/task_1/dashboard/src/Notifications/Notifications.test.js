@@ -14,7 +14,11 @@ describe('Notifications Test Suite', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = shallow(<Notifications displayDrawer={true}/>);
+      StyleSheetTestUtils.suppressStyleInjection();
     })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it('Test Notifications renders without crashing', () => {
       const wrapper = shallow(<Notifications/>);
       expect(wrapper.exists()).toEqual(true);

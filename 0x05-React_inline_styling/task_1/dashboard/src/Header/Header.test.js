@@ -3,6 +3,12 @@ import { shallow } from 'enzyme';
 import Header from './Header';
 
 describe('Header Test Suite', () => {
+    beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+    })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it('Header renders without crashing', () => {
       const wrapper = shallow(<Header/>);
       expect(wrapper.exists());

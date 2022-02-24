@@ -6,6 +6,9 @@ import Login from '../Login/Login';
 
 
 describe('App Test Suite', () => {
+    beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+    });
     it('App renders without crashing', () => {
       const wrapper = shallow(<App/>);
       // expect(wrapper.exists());

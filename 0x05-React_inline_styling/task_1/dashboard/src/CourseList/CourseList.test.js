@@ -12,7 +12,11 @@ describe("CourseList Test Suite", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = shallow(<CourseList listCourses={courses}/>);
+        StyleSheetTestUtils.suppressStyleInjection();
     })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it("Renders correctly when passing in empty array or undefined", () => {
         wrapper = shallow(<CourseList/>);
         const wrapper2 = shallow(<CourseList listCourses={[]}/>);

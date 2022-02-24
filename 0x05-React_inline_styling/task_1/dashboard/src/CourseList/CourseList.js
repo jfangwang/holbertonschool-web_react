@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    border: '2px solid lightgray'
+    border: '2px solid lightgray',
+    borderCollapse: 'collapse',
   },
   thead: {
     tr: {

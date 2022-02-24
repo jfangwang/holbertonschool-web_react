@@ -4,6 +4,12 @@ import BodySection from './BodySection';
 
 
 describe('BodySection Test Suite', () => {
+	beforeEach(() => {
+		StyleSheetTestUtils.suppressStyleInjection();
+	})
+	afterEach(() => {
+		StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+	});
 	it('Renders an <h2> element and children', () => {
 		const wrapper = shallow(
 		<BodySection title="test title">

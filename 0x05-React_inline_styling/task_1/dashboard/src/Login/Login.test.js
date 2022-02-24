@@ -3,6 +3,12 @@ import { shallow } from 'enzyme';
 import Login from './Login';
 
 describe('Login Test Suite', () => {
+    beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+    })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it('Login renders without crashing', () => {
       const wrapper = shallow(<Login/>);
       expect(wrapper.exists());
