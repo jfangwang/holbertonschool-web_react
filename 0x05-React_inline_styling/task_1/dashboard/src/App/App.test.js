@@ -3,11 +3,15 @@ import { shallow } from 'enzyme';
 import App from './App';
 import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 
 describe('App Test Suite', () => {
     beforeEach(() => {
       StyleSheetTestUtils.suppressStyleInjection();
+    });
+    afterEach(() => {
+      StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
     });
     it('App renders without crashing', () => {
       const wrapper = shallow(<App/>);

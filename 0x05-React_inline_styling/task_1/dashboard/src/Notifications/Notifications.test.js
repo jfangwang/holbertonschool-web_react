@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import Notifications from './Notifications'
 import NotificationItem from './NotificationItem'
 import { getLatestNotification } from '../utils/utils';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 const notificationsList = [
   {id: 1, type: "default", value: "Testing..."},

@@ -1,8 +1,15 @@
 import React from "react";
 import { shallow } from "enzyme";
 import CourseListRow from "./CourseListRow";
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe("CourseListRow Test Suite", () => {
+    beforeEach(() => {
+        StyleSheetTestUtils.suppressStyleInjection();
+    });
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it("CourseListRow Renders", () => {
         const wrapper = shallow(<CourseListRow textFirstCell="Test"/>);
         expect(wrapper.exists()).toEqual(true);

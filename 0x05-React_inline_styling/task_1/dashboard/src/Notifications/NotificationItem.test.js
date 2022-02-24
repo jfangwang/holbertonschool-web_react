@@ -2,8 +2,15 @@ import React from 'react';
 import NotificationItem from './NotificationItem';
 import Notifications from './Notifications';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('NotificationItem Test Suite', () => {
+    beforeEach(() => {
+        StyleSheetTestUtils.suppressStyleInjection();
+    });
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
     it('Components Renders Without Crashing', () => {
         const wrapper = shallow(<NotificationItem/>);
         expect(wrapper.exists()).toEqual(true);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Header from './Header';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('Header Test Suite', () => {
     beforeEach(() => {
-      StyleSheetTestUtils.suppressStyleInjection();
+        StyleSheetTestUtils.suppressStyleInjection();
     })
     afterEach(() => {
         StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
