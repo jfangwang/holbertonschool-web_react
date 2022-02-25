@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { shallow } from 'enzyme';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
@@ -17,8 +21,8 @@ describe('BodySectionWithMarginBottom Test Suite', () => {
 			<p>test children node</p>
 		</BodySectionWithMarginBottom>);
 		
-		expect(wrapper.find('div.bodySectionWithMargin BodySection')).toHaveLength(1);
-		expect(wrapper.find('div.bodySectionWithMargin p')).toHaveLength(1);
-		expect(wrapper.find('div.bodySectionWithMargin p').text()).toBe('test children node');
+		expect(wrapper.find('div BodySection')).toHaveLength(1);
+		expect(wrapper.find('div p')).toHaveLength(1);
+		expect(wrapper.find('div p').text()).toBe('test children node');
 	});
 });

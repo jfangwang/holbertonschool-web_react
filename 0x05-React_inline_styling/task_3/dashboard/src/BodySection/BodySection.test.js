@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { shallow } from 'enzyme';
 import BodySection from './BodySection';
@@ -9,7 +13,10 @@ describe('BodySection Test Suite', () => {
 		StyleSheetTestUtils.suppressStyleInjection();
 	})
 	afterEach(() => {
-		StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+		return new Promise(resolve => {
+			StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+			return process.nextTick(resolve);
+		});
 	});
 	it('Renders an <h2> element and children', () => {
 		const wrapper = shallow(
@@ -19,7 +26,8 @@ describe('BodySection Test Suite', () => {
 		
 		// expect(wrapper.find('div.bodySection h2')).toHaveLength(1);
 		// expect(wrapper.find('div.bodySection h2').text()).toBe('test title');
-		expect(wrapper.find('div.bodySection p')).toHaveLength(1);
-		expect(wrapper.find('div.bodySection p').text()).toBe('test children node');
+		expect(wrapper.find('div p')).toHaveLength(1);
+		expect(wrapper.find('div p').text()).toBe('test children node');
+		jest.restoreAllMocks();
 	});
 });

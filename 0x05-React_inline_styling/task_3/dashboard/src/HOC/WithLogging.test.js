@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React, {Component} from 'react';
 import { shallow } from 'enzyme';
 import WithLogging from './WithLogging';

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react'
 import { shallow } from 'enzyme'
 import Notifications from './Notifications'
@@ -29,21 +32,21 @@ describe('Notifications Test Suite', () => {
         expect(wrapper.find("ul").children()).toHaveLength(3);
       });
     it('Test renders the text Here is the list of notifications', () => {
-        expect(wrapper.find(".Notifications p").text()).toEqual("Here is the list of notifications");
+        expect(wrapper.find(".Notifications_hz9cov p").text()).toEqual("Here is the list of notifications");
     });
     it('div.menuItem is being displayed when displayDrawer=False', () => {
       const wrapper = shallow(<Notifications displayDrawer={false}/>);
-      expect(wrapper.find('div.menuItem')).toHaveLength(1);
+      expect(wrapper.find('div.menuItem_c88wb5')).toHaveLength(1);
     })
     it('div.Notifications is not being displayed when displayDrawer=False', () => {
       const wrapper = shallow(<Notifications displayDrawer={false}/>);
       expect(wrapper.find('div.Notifications')).toHaveLength(0);
     })
     it('div.menuItem is not being displayed when displayDrawer=True', () => {
-      expect(wrapper.find('div.menuItem')).toHaveLength(1);
+      expect(wrapper.find('div.menuItem_c88wb5')).toHaveLength(1);
     })
     it('div.Notifications is being displayed when displayDrawer=True', () => {
-      expect(wrapper.find('div.Notifications')).toHaveLength(1);
+      expect(wrapper.find('div.Notifications_hz9cov')).toHaveLength(1);
     })
     it('Renders when passing in empty array or undefined listNotifications', () => {
       const wrapper2 = shallow(<Notifications displayDrawer={true} listNotifications={[]}/>);
@@ -52,14 +55,14 @@ describe('Notifications Test Suite', () => {
     })
     it('Renders when passing in a list of notifications with corrent num of items', () => {
       const wrapper2 = shallow(<Notifications displayDrawer={true} listNotifications={notificationsList}/>);
-      expect(wrapper2.find('div.Notifications ul NotificationItem')).toHaveLength(3);
-      expect(wrapper2.find('div.Notifications ul NotificationItem').at(0).prop('value')).toEqual("Testing...");
-      expect(wrapper2.find('div.Notifications ul NotificationItem').at(1).prop('type')).toEqual("urgent");
+      expect(wrapper2.find('div.Notifications_hz9cov ul NotificationItem')).toHaveLength(3);
+      expect(wrapper2.find('div.Notifications_hz9cov ul NotificationItem').at(0).prop('value')).toEqual("Testing...");
+      expect(wrapper2.find('div.Notifications_hz9cov ul NotificationItem').at(1).prop('type')).toEqual("urgent");
     })
     it('Correct message when listNotifications is empty', () => {
       const wrapper2 = shallow(<Notifications displayDrawer={true} listNotifications={[]}/>);
-      expect(wrapper.find('div.Notifications ul NotificationItem').prop('value')).toEqual("No new notification for now");
-      expect(wrapper2.find('div.Notifications ul NotificationItem').prop('value')).toEqual("No new notification for now");
+      expect(wrapper.find('div.Notifications_hz9cov ul NotificationItem').prop('value')).toEqual("No new notification for now");
+      expect(wrapper2.find('div.Notifications_hz9cov ul NotificationItem').prop('value')).toEqual("No new notification for now");
     })
     it('when updating the props of the component with the same list, the component doesn’t rerender', () => {
       const list = [
