@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 export default function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
 
   let body = null;
-  const bgrow = {backgroundColor: '#F5F5AB'}
-  const bgheader = {backgroundColor: '#B5B545'}
+  const bgrow = {backgroundColor: '#f5f5f5ab'}
+  const bgheader = {backgroundColor: '#deb5b545'}
   let bgcolor;
 
   if (isHeader === true) {
