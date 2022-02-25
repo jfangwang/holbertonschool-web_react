@@ -37,7 +37,7 @@ export default function CourseList({listCourses}) {
         <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
       </thead>
       <tbody>
-        {listCourses.length === 0 ? <CourseListRow textFirstCell='No course available yet'/> :
+        {listCourses.length <= 0 ? <CourseListRow textFirstCell='No course available yet'/> :
           listCourses.map((item) => (
             <CourseListRow key={item.id} textFirstCell={item.name} textSecondCell={item.credit} />
           ))

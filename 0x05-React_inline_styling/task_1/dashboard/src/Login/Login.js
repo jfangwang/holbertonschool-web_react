@@ -6,6 +6,9 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   label: {
     padding: '8px 4px 8px 4px',
+  },
+  margin: {
+    
   }
 });
 

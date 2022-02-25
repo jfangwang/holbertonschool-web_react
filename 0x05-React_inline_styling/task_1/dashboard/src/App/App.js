@@ -38,7 +38,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     width: '100%',
-  }
+  },
+  body: {
+  },
 
 });
 

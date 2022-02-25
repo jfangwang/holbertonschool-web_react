@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     display: 'flex'
   },
+  header: {
+  }
 });
 
 export default function Header() {
