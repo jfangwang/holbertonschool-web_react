@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import NotificationItem from './NotificationItem';
 import Notifications from './Notifications';
@@ -21,7 +24,7 @@ describe('NotificationItem Test Suite', () => {
     })
     it('Renders the correct html', () => {
         const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }}/>);
-        expect(wrapper.html()).toEqual('<li data-priority="default"><u>test</u></li>');
+        expect(wrapper.html()).toEqual('<li class=\"default_tg3w1n\" data-priority=\"default\"><u>test</u></li>');
     })
     it ('markAsRead function works', () => {
         const wrapper = shallow(<Notifications/>);

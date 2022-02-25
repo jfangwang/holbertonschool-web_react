@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { getFullYear,getFooterCopy, getLatestNotification } from './utils';
 
 describe('Utils Test Suite', () => {
