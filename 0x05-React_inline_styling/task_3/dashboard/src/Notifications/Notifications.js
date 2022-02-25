@@ -6,64 +6,65 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 const screenSize = {
-  small: '@media screen and (max-width: 900px)',
+	small: '@media screen and (max-width: 900px)',
 };
 const opacityKf = {
-  from: {
-    opacity: 0.5,
-  },
+	from: {
+		opacity: 0.5,
+	},
 
-  to: {
-    opacity: 1,
-  },
+	to: {
+		opacity: 1,
+	},
 };
 
 const translateYkf = {
-  '0%': {
-    transform: 'translateY(0)',
-  },
+	'0%': {
+		transform: 'translateY(0)',
+	},
 
-  '50%': {
-    transform: 'translateY(-5px)',
-  },
+	'50%': {
+		transform: 'translateY(-5px)',
+	},
 
-  '75%': {
-    transform: 'translateY(5px)',
-  },
+	'75%': {
+		transform: 'translateY(5px)',
+	},
 
-  '100%': {
-    transform: 'translateY(0)',
-  },
+	'100%': {
+		transform: 'translateY(0)',
+	},
 };
 
 const borderKf = {
-  '0%': {
-    border: `3px dashed cyan`,
-  },
+	'0%': {
+		border: `3px dashed cyan`,
+	},
 
-  '100%': {
-    border: `3px dashed #e0344a`,
-  },
+	'100%': {
+		border: `3px dashed #e0344a`,
+	},
 };
 
 const styles = StyleSheet.create({
 	Notifications: {
-	  border: '2px dashed red',
-	  display: 'flex',
-	  flexDirection: 'column',
-	  position: 'absolute',
-	  top: '2.5rem',
-	  right: '0',
-	  marginRight: '1rem',
-	  paddingLeft: '1rem',
-	  paddingRight: '6rem',
-	  justifyContent: 'left',
-	  zIndex: '1',
+		fontSize: '20px',
+    border: 'thin dotted #e0344a',
+    padding: '4px 16px',
+    float: 'right',
+    [screenSize.small]: {
+      width: '90%',
+			position:'absolute',
+      border: 'none',
+      backgroundColor: 'white',
+			zIndex: 100,
+    },
 		backgroundColor: 'white',
-		animationName: [borderKf],
-    animationDuration: '0.8s',
-    animationIterationCount: 1,
-    animationFillMode: 'forwards',
+	},
+	list: {
+		[screenSize.small]: {
+			paddingInlineStart: 0
+    },
 	},
 	menuItem: {
 		position: 'absolute',
@@ -72,23 +73,22 @@ const styles = StyleSheet.create({
 		padding: '0',
 		marginRight: '1rem',
 		':hover': {
-      cursor: 'pointer',
-      animationName: [opacityKf, translateYkf],
-      animationDuration: '1s, 0.5s',
-      animationIterationCount: 3,
-    },
+			cursor: 'pointer',
+			animationName: [opacityKf, translateYkf],
+			animationDuration: '1s, 0.5s',
+			animationIterationCount: 3,
+		},
 	},
 	showOff: {
-		marginRight: '8px',
-		[screenSize.small]: {
-		  display: 'none',
-		},
+		textAlign: 'right',
+    marginRight: '16px',
+    [screenSize.small]: {},
 	},
 
 	showOn: {
-	marginRight: '8px',
+		marginRight: '8px',
 	},
-  });
+});
 
 class Notifications extends Component {
 	// ({displayDrawer, listNotifications})
@@ -103,7 +103,7 @@ class Notifications extends Component {
 		console.log(`Notification ${id} has been marked as read`);
 	}
 	render() {
-		const {displayDrawer, listNotifications} = this.props;
+		const { displayDrawer, listNotifications } = this.props;
 		const show = css(displayDrawer ? styles.showOff : styles.showOn);
 		return (
 			<>
@@ -123,8 +123,8 @@ class Notifications extends Component {
 						>
 							<img style={{ height: '15px', width: '15px' }} src={closeIcon} alt="closeIcon"></img>
 						</button>
-						<ul>
-							{listNotifications.length === 0 ? <NotificationItem value="No new notification for now"/> :
+						<ul className={css(styles.list)}>
+							{listNotifications.length === 0 ? <NotificationItem value="No new notification for now" /> :
 								listNotifications.map((item) => (
 									<NotificationItem key={item.id} id={item.id} html={item.html} type={item.type} value={item.value} markAsRead={this.markAsRead} />
 								))}
