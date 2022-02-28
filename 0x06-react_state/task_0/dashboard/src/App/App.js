@@ -45,15 +45,6 @@ const styles = StyleSheet.create({
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      displayDrawer: null,
-    }
-  }
-  handleDisplayDrawer() {
-    this.setState({displayDrawer: true})
-  }
-  handleHideDrawer() {
-    this.setState({displayDrawer: false})
   }
   handleLogout(event) {
     var name = event.key;

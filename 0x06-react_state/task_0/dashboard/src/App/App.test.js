@@ -62,12 +62,4 @@ describe('App Test Suite', () => {
       expect(spy);
       expect(func);
     })
-    it('Display drawers state', () => {
-      const wrapper = shallow(<App/>);
-      expect(wrapper.state().displayDrawer).toEqual(false);
-      wrapper.instance().handleDisplayDrawer();
-      expect(wrapper.state().displayDrawer).toEqual(true);
-      wrapper.instance().handleDisplayDrawer();
-      expect(wrapper.state().displayDrawer).toEqual(false);
-   });
   });
