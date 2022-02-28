@@ -19,7 +19,7 @@ describe('App Test Suite', () => {
     });
     it('App renders without crashing', () => {
       const wrapper = shallow(<App/>);
-      // expect(wrapper.exists());
+      expect(wrapper.exists());
     });
     // it('Verify that App renders a div with the class App-body', () => {
     //   const wrapper = shallow(<App/>);
@@ -61,5 +61,13 @@ describe('App Test Suite', () => {
       const spy = jest.spyOn(global, 'alert')
       expect(spy);
       expect(func);
+    })
+    it('displayDrawer', () => {
+      const wrapper = shallow(<App/>);
+      expect(wrapper.state('displayDrawer')).toEqual(false);
+      wrapper.instance().handleDisplayDrawer();
+      expect(wrapper.state('displayDrawer')).toEqual(true);
+      wrapper.instance().handleHideDrawer();
+      expect(wrapper.state('displayDrawer')).toEqual(false);
     })
   });

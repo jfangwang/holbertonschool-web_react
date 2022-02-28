@@ -97,17 +97,17 @@ class Notifications extends Component {
 		this.markAsRead = this.markAsRead.bind(this);
 	}
 	shouldComponentUpdate(Nextprops) {
-		return (Nextprops.listNotifications.length > this.props.listNotifications.length)
+		return (Nextprops.listNotifications.length > this.props.listNotifications.length || Nextprops.displayDrawer !== this.props.displayDrawer)
 	}
 	markAsRead(id) {
 		console.log(`Notification ${id} has been marked as read`);
 	}
 	render() {
-		const {displayDrawer, listNotifications} = this.props;
+		const {displayDrawer, listNotifications, handleHideDrawer, handleDisplayDrawer} = this.props;
 		const show = css(displayDrawer ? styles.showOff : styles.showOn);
 		return (
 			<>
-				<div className={css(styles.menuItem)}>
+				<div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
 					<p className={show}>Your notifications</p>
 				</div>
 				{displayDrawer && (
@@ -119,7 +119,7 @@ class Notifications extends Component {
 								background: 'transparent', padding: 'none', position: 'absolute', right: '10px', top: '10px'
 							}}
 							aria-label="Close"
-							onClick={() => console.log("Close button has been clicked")}
+							onClick={handleHideDrawer}
 						>
 							<img style={{ height: '15px', width: '15px' }} src={closeIcon} alt="closeIcon"></img>
 						</button>
@@ -139,11 +139,15 @@ class Notifications extends Component {
 };
 Notifications.defaultProps = {
 	displayDrawer: false,
-	listNotifications: [{ id: 1, type: "default", value: "No new notification for now" }]
+	listNotifications: [{ id: 1, type: "default", value: "No new notification for now" }],
+	handleDisplayDrawer: () => null,
+	handleHideDrawer: () => null
 }
 Notifications.propTypes = {
 	displayDrawer: PropTypes.bool,
-	listNotifications: PropTypes.arrayOf(NotificationItemShape)
+	listNotifications: PropTypes.arrayOf(NotificationItemShape),
+	handleDisplayDrawer: PropTypes.func,
+	handleHideDrawer: PropTypes.func
 }
 
 export default Notifications;

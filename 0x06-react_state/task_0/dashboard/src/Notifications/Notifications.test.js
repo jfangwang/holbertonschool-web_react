@@ -2,9 +2,10 @@
  * @jest-environment jsdom
  */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import Notifications from './Notifications'
 import NotificationItem from './NotificationItem'
+import App from '../App/App'
 import { getLatestNotification } from '../utils/utils';
 import { StyleSheetTestUtils } from 'aphrodite';
 
@@ -104,3 +105,28 @@ describe('Notifications Test Suite', () => {
       jest.restoreAllMocks();
     })
   });
+
+  describe('States', () => {
+    beforeEach(() => {
+      StyleSheetTestUtils.suppressStyleInjection();
+    })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+        jest.restoreAllMocks();
+    });
+    let props = {
+      displayDrawer: false,
+      handleDisplayDrawer: jest.fn(),
+      handleHideDrawer: jest.fn(),
+    };
+    it('handle display and hide', () => {
+      const wrapper = shallow(<Notifications {...props}/>);
+      
+      wrapper.find('.menuItem_c88wb5').simulate('click');
+      expect(props.handleDisplayDrawer.mock.calls.length).toBe(1);
+      // expect(props.handleDisplayDrawer).toHaveBeenCalled();
+      const wrapper2 = shallow(<Notifications displayDrawer={true} handleHideDrawer={props.handleHideDrawer}/>);
+      wrapper2.find('#notification_button').simulate('click');
+      expect(props.handleHideDrawer.mock.calls.length).toBe(1);
+    })
+  })
