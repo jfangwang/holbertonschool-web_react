@@ -10,7 +10,7 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
-import {user, logOut, AppContext} from './AppContext';
+import {defaultUser, AppContext} from './AppContext';
 
 const courses = [
   {id: 1, name: "ES6", credit: 60},
@@ -47,8 +47,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user,
-      logOut: () => {this.setState({user: user})},
+      user: defaultUser,
+      logOut: () => {this.setState({user: defaultUser})},
       listNotifications: [
         {id: 1, type: "default", value: "New course available"},
         {id: 2, type: "urgent", value: "New resume available"},

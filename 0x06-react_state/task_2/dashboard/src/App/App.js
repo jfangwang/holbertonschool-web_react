@@ -10,7 +10,7 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
-import {user, logOut, AppContext} from './AppContext';
+import {defaultUser, AppContext} from './AppContext';
 
 const courses = [
   {id: 1, name: "ES6", credit: 60},
@@ -47,8 +47,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user,
-      logOut: () => {this.setState({user: user})},
+      user: defaultUser,
+      logOut: () => {this.setState({user: defaultUser})},
     }
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
     this.handleHideDrawer = this.handleHideDrawer.bind(this)
