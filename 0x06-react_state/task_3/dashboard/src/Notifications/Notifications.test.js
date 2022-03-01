@@ -65,51 +65,13 @@ describe('Notifications Test Suite', () => {
       expect(wrapper.find('div.Notifications_hz9cov ul NotificationItem').prop('value')).toEqual("No new notification for now");
       expect(wrapper2.find('div.Notifications_hz9cov ul NotificationItem').prop('value')).toEqual("No new notification for now");
     })
-    it('when updating the props of the component with the same list, the component doesn’t rerender', () => {
-      const list = [
-        {id: 1, type: 'default', value: 'Testing'},
-        {id: 2, type: 'urgent', value: 'Testing 2'},
-      ];
-      const wrapper = shallow(
-        <Notifications listNotifications={list} />
-      );
-      const update = jest.spyOn(
-        Notifications.prototype,
-        'shouldComponentUpdate'
-      );
-      wrapper.setProps({listNotifications: list});
-      expect(update).toHaveBeenCalled();
-      expect(update).toHaveLastReturnedWith(false);
-      jest.restoreAllMocks();
-    })
-    it(' when updating the props of the component with a longer list, the component does rerender', () => {
-      const list1 = [
-        {id: 1, type: 'default', value: 'Testing'},
-        {id: 2, type: 'urgent', value: 'Testing 2'},
-      ];
-      const list2 = [
-        {id: 1, type: 'default', value: 'Testing'},
-        {id: 2, type: 'urgent', value: 'Testing 2'},
-        {id: 3, type: 'urgent', value: 'Testing 3'}
-      ];
-      const wrapper = shallow(
-        <Notifications listNotifications={list1} />
-      );
-      const update = jest.spyOn(
-        Notifications.prototype,
-        'shouldComponentUpdate'
-      );
-      wrapper.setProps({listNotifications: list2});
-      expect(update).toHaveBeenCalled();
-      expect(update).toHaveLastReturnedWith(true);
-      jest.restoreAllMocks();
-    })
   });
 
+ 
   describe('States', () => {
     beforeEach(() => {
       StyleSheetTestUtils.suppressStyleInjection();
-    })
+    });
     afterEach(() => {
         StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
         jest.restoreAllMocks();
@@ -128,5 +90,37 @@ describe('Notifications Test Suite', () => {
       const wrapper2 = shallow(<Notifications displayDrawer={true} handleHideDrawer={props.handleHideDrawer}/>);
       wrapper2.find('#notification_button').simulate('click');
       expect(props.handleHideDrawer.mock.calls.length).toBe(1);
-    })
-  })
+    });
+
+    it('HandleDisplayDrawer works correctly', () => {
+      const wrapper = shallow(<Notifications {...props}/>);
+      const spy = jest.spyOn(wrapper.instance().props, 'handleDisplayDrawer');
+      wrapper.find(".menuItem_c88wb5").simulate('click');
+      expect(spy).toBeCalled()
+      spy.mockRestore();
+    });
+    props = {
+      listNotifications: notificationsList,
+      displayDrawer: true,
+      handleDisplayDrawer: jest.fn(),
+      handleHideDrawer: jest.fn(),
+    };
+    it('HandleHideDrawer works correctly', () => {
+      const wrapper = shallow(<Notifications {...props}/>);
+      const spy = jest.spyOn(wrapper.instance().props, 'handleHideDrawer');
+      wrapper.find("#notification_button").simulate('click');
+      expect(spy).toBeCalled()
+      spy.mockRestore();
+    });
+    it('MarkAsRead is called', () => {
+      const wrapper = shallow(<Notifications {...props}/>);
+      const spy = jest.spyOn(console, 'log').mockImplementation();
+
+      wrapper.instance().markAsRead = spy;
+      wrapper.instance().markAsRead(1);
+      expect(spy).toBeCalledWith(1);
+      expect(spy).toBeCalledTimes(1);
+      console.log(wrapper.state());
+      spy.mockRestore();
+    });
+  });

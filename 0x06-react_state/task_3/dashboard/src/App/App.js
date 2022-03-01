@@ -20,11 +20,11 @@ const courses = [
 {/* <NotificationItem type='default' value='New course available'></NotificationItem>
     <NotificationItem type='urgent' value='New resume available'></NotificationItem>
     <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem> */}
-const notificationsList = [
-  {id: 1, type: "default", value: "New course available"},
-  {id: 2, type: "urgent", value: "New resume available"},
-  {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
-]
+// const notificationsList = [
+//   {id: 1, type: "default", value: "New course available"},
+//   {id: 2, type: "urgent", value: "New resume available"},
+//   {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
+// ]
 const styles = StyleSheet.create({
   App: {
     position: 'absolute',
@@ -49,10 +49,16 @@ class App extends React.Component {
       displayDrawer: false,
       user,
       logOut: () => {this.setState({user: user})},
+      listNotifications: [
+        {id: 1, type: "default", value: "New course available"},
+        {id: 2, type: "urgent", value: "New resume available"},
+        {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
+      ]
     }
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
     this.handleHideDrawer = this.handleHideDrawer.bind(this)
     this.logIn = this.logIn.bind(this)
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this)
   }
   logIn(email, password) {
     this.setState({
@@ -79,11 +85,20 @@ class App extends React.Component {
     var ctrl = event.ctrlKey;
     if (name === "h" && ctrl === true) {
       alert("Logging you out");
-      this.props.logOut();
+      this.state.logOut();
     }
   }
+  markNotificationAsRead(id) {
+    const new_list = [];
+    this.state.listNotifications.forEach((item) => {
+      if (item.id !== id) {
+        new_list.push(item);
+      }
+    })
+    this.setState({listNotifications: new_list})
+  }
   componentDidMount() {
-    document.addEventListener('keypress', this.handleLogout(this.props.logOut));
+    document.addEventListener('keypress', this.handleLogout(this.state.logOut));
   }
 
   render() {
@@ -94,10 +109,11 @@ class App extends React.Component {
       <>
         <AppContext.Provider value={{user, logOut}}>
           <Notifications
-            listNotifications={notificationsList}
+            listNotifications={this.state.listNotifications}
             displayDrawer={this.state.displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
             <Header/>

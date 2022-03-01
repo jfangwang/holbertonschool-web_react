@@ -94,16 +94,9 @@ class Notifications extends Component {
 	// ({displayDrawer, listNotifications})
 	constructor(props) {
 		super(props);
-		this.markAsRead = this.markAsRead.bind(this);
-	}
-	shouldComponentUpdate(Nextprops) {
-		return (Nextprops.listNotifications.length > this.props.listNotifications.length || Nextprops.displayDrawer !== this.props.displayDrawer)
-	}
-	markAsRead(id) {
-		console.log(`Notification ${id} has been marked as read`);
 	}
 	render() {
-		const {displayDrawer, listNotifications, handleHideDrawer, handleDisplayDrawer} = this.props;
+		const {displayDrawer, listNotifications, handleHideDrawer, handleDisplayDrawer, markNotificationAsRead} = this.props;
 		const show = css(displayDrawer ? styles.showOff : styles.showOn);
 		return (
 			<>
@@ -127,7 +120,7 @@ class Notifications extends Component {
 						<ul>
 							{listNotifications.length === 0 ? <NotificationItem value="No new notification for now"/> :
 								listNotifications.map((item) => (
-									<NotificationItem key={item.id} id={item.id} html={item.html} type={item.type} value={item.value} markAsRead={this.markAsRead} />
+									<NotificationItem key={item.id} id={item.id} html={item.html} type={item.type} value={item.value} markAsRead={markNotificationAsRead} />
 								))}
 						</ul>
 					</div>
