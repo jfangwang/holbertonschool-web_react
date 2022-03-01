@@ -47,13 +47,13 @@ describe('App Test Suite', () => {
     });
     it('CourseList is not displayed', () => {
       const wrapper = shallow(<App isLoggedIn={true}/>);
-      expect(wrapper.find(Login)).toHaveLength(0);
-      expect(wrapper.find(CourseList)).toHaveLength(1);
+      expect(wrapper.find(Login)).toHaveLength(1);
+      expect(wrapper.find(CourseList)).toHaveLength(0);
     });
     it('Login true', () => {
       const wrapper = shallow(<App isLoggedIn={true}/>);
-      expect(wrapper.find('Login')).toHaveLength(0);
-      expect(wrapper.find('CourseList')).toHaveLength(1);
+      expect(wrapper.find('Login')).toHaveLength(1);
+      expect(wrapper.find('CourseList')).toHaveLength(0);
     })
     it('logout works', () => {
       const func = jest.fn(() => undefined);

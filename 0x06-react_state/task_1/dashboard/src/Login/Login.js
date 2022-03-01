@@ -46,12 +46,12 @@ class Login extends Component {
     return (
       <>
       <p>Login to access the full dashboard</p>
-      <form>
+      <form onSubmit={this.handleLoginSubmit}>
         <label className={css(styles.label)} htmlFor="email">Email</label>
         <input id="email" type="email" value={this.state.email} onChange={this.handleChangeEmail}/>
         <label className={css(styles.label)} htmlFor="password">Password</label>
         <input id="password" type="password" value={this.state.password} onChange={this.handleChangePassword}/>
-        <button type="submit" id="ok_button" onClick={this.handleLoginSubmit} disabled={!this.state.enableSubmit}>OK</button>
+        <button type="submit" id="ok_button" disabled={!this.state.enableSubmit}>OK</button>
       </form>
     </>
     )

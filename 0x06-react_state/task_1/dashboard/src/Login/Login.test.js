@@ -33,11 +33,14 @@ describe('States Test', () => {
   });
   it('button is disabled when form is empty', () => {
     const wrapper = shallow(<Login isLoggedIn={false}/>);
-    expect(wrapper.state('isLoggedIn')).toEqual(false);
+    // expect(wrapper.state('isLoggedIn')).toEqual(false);
     expect(wrapper.find('#ok_button').prop('disabled')).toEqual(true);
+  });
+  it('button is enables when email and pass is filled', () => {
+    const wrapper = shallow(<Login isLoggedIn={false}/>);
     wrapper.find('#email').simulate('change', {target: {value: 'hello'}})
     expect(wrapper.find('#ok_button').prop('disabled')).toEqual(true);
     wrapper.find('#password').simulate('change', {target: {value: 'hello'}})
     expect(wrapper.find('#ok_button').prop('disabled')).toEqual(false);
-  });
+  })
 });
