@@ -17,13 +17,14 @@ const styles = StyleSheet.create({
   },
   thead: {
     width: '100%',
+
+  },
+  tbody: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent:"center",
     alignItems: 'center',
-  },
-  tbody: {
-
   },
 });
 
@@ -32,7 +33,7 @@ export default function CourseList({listCourses}) {
   return (
     <table className={css(styles.table)}>
       <thead className={css(styles.thead, styles.thead.tr)}>
-        <CourseListRow textFirstCell="Available courses" isHeader={true} />
+        <CourseListRow textFirstCell="Available courses" textSecondCell="" isHeader={true} />
         <CourseListRow textFirstCell="Course name" textSecondCell="Credit" isHeader={true} />
       </thead>
       <tbody className={css(styles.tbody)}>
