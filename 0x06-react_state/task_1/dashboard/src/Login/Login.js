@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getFullYear, getFooterCopy} from '../utils/utils';
 import logo from '../assets/Holberton_Logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   label: {
@@ -56,6 +57,13 @@ class Login extends Component {
     </>
     )
   }
+}
+
+Login.defaultProps = {
+  isLoggedIn: false,
+}
+Login.propTypes = {
+  isLoggedIn: PropTypes.bool,
 }
 
 export default Login
