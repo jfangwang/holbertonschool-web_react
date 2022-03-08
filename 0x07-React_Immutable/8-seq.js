@@ -8,7 +8,7 @@ export default function printBestStudents(object) {
     student[k].lastName = student[k].lastName.replace(/\b(\w)/g, (s) => s.toUpperCase());
     return student[k];
   });
-  return student;
+  console.log(student);
 }
 
 // const grades = {
