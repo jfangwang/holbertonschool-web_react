@@ -6,16 +6,16 @@ export default function printBestStudents(object) {
   Object.keys(student).map((k) => {
     student[k].firstName = student[k].firstName.replace(/\b(\w)/g, (s) => s.toUpperCase());
     student[k].lastName = student[k].lastName.replace(/\b(\w)/g, (s) => s.toUpperCase());
-    return student;
+    return student[k];
   });
   return student;
 }
 
-const grades = {
-  1: {
-    score: 99,
-    firstName: 'guillaume',
-    lastName: 'salva',
-  }
-};
-console.log(printBestStudents(grades));
+// const grades = {
+//   1: {
+//     score: 99,
+//     firstName: 'guillaume',
+//     lastName: 'salva',
+//   }
+// };
+// console.log(printBestStudents(grades));
