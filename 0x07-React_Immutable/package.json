@@ -2,11 +2,14 @@
   "type": "module",
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
+    "fix": "./node_modules/.bin/eslint --fix",
     "check-lint": "lint [0-9]*.js",
+    "dev": "npx babel-node",
     "test": "jest",
     "full-test": "./node_modules/.bin/eslint [0-9]*.js && jest"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "babel-jest": "^27.5.1",
@@ -22,9 +25,24 @@
     "@babel/node": "^7.8.0",
     "@babel/preset-env": "^7.6.0",
     "eslint": "^6.4.0",
+=======
+    "@babel/core": "^7.16.5",
+    "@babel/node": "^7.8.0",
+    "@babel/preset-env": "^7.16.5",
+    "babel-jest": "^27.4.5",
+    "eslint": "^6.8.0",
+>>>>>>> 3bef0edff39464e4504dcfbd133aae0a29a37922
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.17.0",
     "jest": "^24.9.0"
+<<<<<<< HEAD
+=======
+  },
+  "dependencies": {
+    "package.json": "^2.0.1",
+    "immutable": "^4.0.0-rc.12"
+>>>>>>> 3bef0edff39464e4504dcfbd133aae0a29a37922
   }
 }
+
