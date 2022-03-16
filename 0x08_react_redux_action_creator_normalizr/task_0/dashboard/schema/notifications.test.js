@@ -5,7 +5,7 @@
  import React from 'react';
  import { shallow, mount } from 'enzyme';
  import * as db from '../notifications.json';
- import getAllNotificationsByUser from './notifications';
+ import { getAllNotificationsByUser } from './notifications';
 
  const dummy = [
   {
@@ -30,6 +30,7 @@
   // afterEach(() => {
   // });
   it('Function is working', () => {
-    getAllNotificationsByUser(dummy);
+    const test = getAllNotificationsByUser('5debd764a7c57c7839d722e9');
+    expect(test).toEqual(expect.arrayContaining(dummy));
   });
 })
