@@ -1,0 +1,16 @@
+:root {
+  --red: red;
+}
+.App-footer {
+  border-top: var(--red) 4px solid;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-style: italic;
+}
+.App-footer > p {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
