@@ -115,8 +115,8 @@ class App extends React.Component {
           <Notifications
             listNotifications={this.state.listNotifications}
             displayDrawer={displayDrawer}
-            // handleDisplayDrawer={this.handleDisplayDrawer}
-            // handleHideDrawer={this.handleHideDrawer}
+            handleDisplayDrawer={displayNotificationDrawer}
+            handleHideDrawer={hideNotificationDrawer}
             markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
@@ -171,5 +171,5 @@ const mapDispatchToProps = {
   login: loginRequest,
   logout,
 }
-connect(mapStateToProps, mapDispatchToProps)(App);
-export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
