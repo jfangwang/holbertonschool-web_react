@@ -3,27 +3,27 @@
  */
 import React from "react";
 import { shallow } from "enzyme";
-import CourseList from "./CourseList";
+import {CourseList} from "./CourseList";
 import { StyleSheetTestUtils } from 'aphrodite';
 
 const courses = [
-    {id: 3, name: "Science", credit: 15},
-    {id: 1, name: "History", credit: 4},
-    {id: 2, name: "Writing", credit: 80}
-  ]
+    { id: 3, name: "Science", credit: 15 },
+    { id: 1, name: "History", credit: 4 },
+    { id: 2, name: "Writing", credit: 80 }
+]
 
 describe("CourseList Test Suite", () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = shallow(<CourseList listCourses={courses}/>);
+        wrapper = shallow(<CourseList listCourses={courses} />);
         StyleSheetTestUtils.suppressStyleInjection();
     })
     afterEach(() => {
         StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
     });
     it("Renders correctly when passing in empty array or undefined", () => {
-        wrapper = shallow(<CourseList/>);
-        const wrapper2 = shallow(<CourseList listCourses={[]}/>);
+        wrapper = shallow(<CourseList />);
+        const wrapper2 = shallow(<CourseList listCourses={[]} />);
         expect(wrapper.exists());
         expect(wrapper2.exists());
     });
@@ -57,3 +57,44 @@ describe("CourseList Test Suite", () => {
         expect(wrapper.find('CourseListRow').at(2).prop('textSecondCell', 80));
     });
 });
+
+describe("Redux suite test", () => {
+    beforeEach(() => {
+        StyleSheetTestUtils.suppressStyleInjection();
+        jest.restoreAllMocks();
+    })
+    afterEach(() => {
+        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+    });
+    it("fetchCourses is called when the component is mounted", () => {
+        const fetchCourses = jest.fn();
+        const wrapper = shallow(<CourseList fetchCourses={fetchCourses} />);
+        expect(fetchCourses).toHaveBeenCalled();
+    });
+
+    it("verify that the two actions are correctly dispatched when the onChangeRow function is called", () => {
+        const fetchCourses = jest.fn();
+        const selectCourse = jest.fn();
+        const unSelectCourse = jest.fn();
+
+        const wrapper = shallow(
+            <CourseList
+                fetchCourses={fetchCourses}
+                selectCourse={selectCourse}
+                unSelectCourse={unSelectCourse}
+            />
+        );
+
+        const instance = wrapper.instance();
+
+        instance.onChangeRow("1", true);
+
+        expect(selectCourse).toHaveBeenCalled();
+
+        instance.onChangeRow("1", false);
+
+        expect(unSelectCourse).toHaveBeenCalled();
+
+        jest.restoreAllMocks();
+    });
+})

@@ -1,5 +1,7 @@
 import { SELECT_COURSE, UNSELECT_COURSE, FETCH_COURSE_SUCCESS } from "./courseActionTypes";
 
+import 'node-fetch'
+
 export function selectCourse(index) {
   return {
     type: SELECT_COURSE,
@@ -29,6 +31,6 @@ export const fetchCourses = () => {
     return fetch("./courses.json")
       .then((r) => r.json())
       .then((data) => dispatch(setCourses(data)))
-      .catch((err) => {});
+      .catch((err) => console.log("failed to fetch courses"));
   };
 };

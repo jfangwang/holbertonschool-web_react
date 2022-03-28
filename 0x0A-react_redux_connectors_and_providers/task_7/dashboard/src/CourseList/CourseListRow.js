@@ -17,16 +17,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function CourseListRow({isHeader, textFirstCell, textSecondCell}) {
+export default function CourseListRow({id, isHeader, textFirstCell, textSecondCell, isChecked, onChangeRow}) {
 
   let body = null;
   const bgrow = {backgroundColor: '#F5F5AB', width: '100%'}
   const bgheader = {backgroundColor: '#B5B545', width: '100%'}
   let bgcolor;
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
   const handleChecked = () => {
-    let status = !isChecked;
-    setIsChecked(status);
+    // let status = !isChecked;
+    // setIsChecked(status);
+    onChangeRow(id, !isChecked);
   }
 
   if (isHeader === true) {
