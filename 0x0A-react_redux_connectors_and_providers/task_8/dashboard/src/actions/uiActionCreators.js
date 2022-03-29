@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_FAILURE } from './uiActionTypes.js';
+import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_FAILURE, LOGIN_SUCCESS } from './uiActionTypes.js';
 import fetch from 'node-fetch';
 
 export function login(email, password) {
@@ -43,7 +43,7 @@ export function boundHideNotificationDrawer() {
 
 export function loginSuccess() {
   return {
-    type: LOGIN_FAILURE,
+    type: LOGIN_SUCCESS,
   }
 }
 export function loginFailure() {
@@ -54,7 +54,7 @@ export function loginFailure() {
 export function loginRequest(email, password) {
   return (dispatch) => {
     dispatch(login(email, password));
-    const lh8080 = 'http://localhost:8080/login-success.json'
+    const lh8080 = './login-success.json'
     const lh3000 = 'http://localhost:3000/login-success.json'
     return fetch(lh8080)
       .then((r) => r.json())

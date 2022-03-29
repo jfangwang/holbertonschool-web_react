@@ -17,16 +17,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default function CourseListRow({id, isHeader, textFirstCell, textSecondCell, isChecked, onChangeRow}) {
+export default function CourseListRow({id, onChangeRow, isHeader, textFirstCell, textSecondCell, isChecked}) {
 
   let body = null;
   const bgrow = {backgroundColor: '#F5F5AB', width: '100%'}
   const bgheader = {backgroundColor: '#B5B545', width: '100%'}
   let bgcolor;
-  // const [isChecked, setIsChecked] = useState(false);
   const handleChecked = () => {
-    // let status = !isChecked;
-    // setIsChecked(status);
     onChangeRow(id, !isChecked);
   }
 
@@ -55,15 +52,18 @@ export default function CourseListRow({id, isHeader, textFirstCell, textSecondCe
   return(<tr className={css(styles.cell)}>{body}</tr>)
 }
 CourseListRow.defaultProps = {
+  id: null,
   isHeader: false,
-  textFirstCell: null,
-  textSecondCell: null 
-}
+  textSecondCell: null,
+  isChecked: false,
+  onChangeRow: () => {},
+};
+
 CourseListRow.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string.isRequired,
-  textSecondCell: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
-}
+  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isChecked: PropTypes.bool,
+  onChangeRow: PropTypes.func,
+};

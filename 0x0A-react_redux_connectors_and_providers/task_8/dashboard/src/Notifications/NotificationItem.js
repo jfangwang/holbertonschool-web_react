@@ -42,7 +42,7 @@ NotificationItem.defaultProps = {
     html: null,
     value: null,
     markAsRead: () => null,
-    id: 1
+    id: "a",
 }
 NotificationItem.propTypes = {
     type: PropTypes.string.isRequired,
@@ -50,6 +50,6 @@ NotificationItem.propTypes = {
         __html: PropTypes.string
     }),
     value: PropTypes.string,
-    id: PropTypes.number,
+    // id: PropTypes.string,
     markAsRead: PropTypes.func
 }

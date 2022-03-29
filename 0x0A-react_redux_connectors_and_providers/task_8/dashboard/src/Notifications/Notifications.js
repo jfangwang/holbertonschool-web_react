@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import closeIcon from '../assets/closeIcon.png';
 import NotificationItem from './NotificationItem';
-// import NotificationItemShape from './NotificationItemShape';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-import { connect } from 'react-redux';
 import { fetchNotifications, markAsAread, setNotificationFilter } from '../actions/notificationActionCreators';
+import { connect } from 'react-redux';
 import { getUnreadNotificationsByType } from '../selectors/notificationSelector';
 
 const screenSize = {
@@ -93,16 +92,23 @@ const styles = StyleSheet.create({
 	},
   });
 
-class Notifications extends Component {
+export class Notifications extends Component {
 	// ({displayDrawer, listNotifications})
 	constructor(props) {
 		super(props);
 	}
 	componentDidMount() {
-		this.props.fetchNotifications();
-	}
+    this.props.fetchNotifications();
+  }
 	render() {
-		const {displayDrawer, listNotifications, handleHideDrawer, handleDisplayDrawer, markNotificationAsRead} = this.props;
+		const {
+			displayDrawer,
+			listNotifications,
+			handleHideDrawer,
+			handleDisplayDrawer,
+			markNotificationAsRead,
+			setNotificationFilter,
+		} = this.props;
 		const show = css(displayDrawer ? styles.showOff : styles.showOn);
 		return (
 			<>
@@ -145,8 +151,8 @@ class Notifications extends Component {
 						</button>
 						<ul>
 							{listNotifications.length === 0 ? <NotificationItem value="No new notification for now"/> :
-								listNotifications.map((item) => (
-									<NotificationItem key={item.id} id={item.id} html={item.html} type={item.type} value={item.value} markAsRead={markNotificationAsRead} />
+								Object.values(listNotifications).map((item) => (
+									<NotificationItem key={item.guid} id={item.guid} html={item.html} type={item.type} value={item.value} markAsRead={markNotificationAsRead} />
 								))}
 						</ul>
 					</div>
@@ -158,34 +164,29 @@ class Notifications extends Component {
 
 };
 Notifications.defaultProps = {
-  displayDrawer: false,
-  listNotifications: [{ id: 1, type: "default", value: "No new notification for now" }],
-  handleDisplayDrawer: () => {},
-  handleHideDrawer: () => {},
-  markNotificationAsRead: () => {},
-  fetchNotifications: () => {},
-  setNotificationFilter: () => {},
+	displayDrawer: false,
+	listNotifications: {},
+	handleDisplayDrawer: () => null,
+	handleHideDrawer: () => null
+}
+Notifications.propTypes = {
+	displayDrawer: PropTypes.bool,
+	listNotifications: PropTypes.object,
+	handleDisplayDrawer: PropTypes.func,
+	handleHideDrawer: PropTypes.func
+}
+
+const mapStateToProps = (state) => {
+	const unread = getUnreadNotificationsByType(state)
+  return {
+    listNotifications: unread
+  };
 };
 
-Notifications.propTypes = {
-  displayDrawer: PropTypes.bool,
-  // listNotifications: PropTypes.object,
-  handleDisplayDrawer: PropTypes.func,
-  handleHideDrawer: PropTypes.func,
-  markNotificationAsRead: PropTypes.func,
-  setNotificationFilter: PropTypes.func,
-};
-const mapStateToProps = (state) => {
-	const unreadNotifications = getUnreadNotificationsByType(state);
-	return {
-		listNotifications: unreadNotifications,
-	}
-}
 const mapDispatchToProps = {
-	fetchNotifications,
+  fetchNotifications,
 	markNotificationAsRead: markAsAread,
 	setNotificationFilter,
-}
+};
 
-connect(mapStateToProps, mapDispatchToProps)(Notifications)
-export default Notifications;
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

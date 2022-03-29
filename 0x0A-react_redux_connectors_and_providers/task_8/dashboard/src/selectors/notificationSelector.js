@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 export const filterTypeSelected = (state) => {
   const filter = state.get('filter');
@@ -10,47 +10,43 @@ export const getNotifications = (state) => {
   return (Map(notifications));
 }
 export const getUnreadNotifications = (state) => {
-  const notifications = state.get('notifications').toJS();
-  Object.keys(notifications).forEach((item) => {
-    if (notifications[item].isRead == true) {
-      delete notifications[item];
-    }
-  });
-  return (Map(notifications));
-}
-
-const getNotificationsSelector = (state) => state.notifications;
-const selectSelf = (state) => state
-
-export const getUnreadNotificationsByType = createSelector(
-  selectSelf,
-  (state) => {
-    const messages = state.get("notifications");
-    const filter = state.get('filter');
-    // Object.keys(notifications).forEach((item) => {
-    //   if (notifications[item].isRead == true) {
-    //     delete notifications[item];
-    //   }
-    // });
-    // return (Map(notifications));
-    if (messages) {
-      let filtered;
-
-      if (filter === "URGENT") {
-        filtered = messages
-          .valueSeq()
-          .filter(
-            (value) =>
-              value.get("isRead") === false && value.get("type") === "urgent"
-          );
-      } else {
-        filtered = messages
-          .valueSeq()
-          .filter((value) => value.get("isRead") === false);
+  const notifications = state.notifications.get('messages')
+  let filtered = notifications
+  if (notifications) {
+    Object.keys(filtered).forEach((item) => {
+      if (filtered[item].isRead == true) {
+        delete filtered[item];
       }
+    });
+  }
+  return (filtered);
+}
+export const getUnreadNotificationsByType = createSelector(
+  state => state.notifications,
+  (notifications) => {
+    const messages = notifications.get("messages");
+    const filter = notifications.get("filter");
+    let filtered = messages;
 
-      return filtered;
+    if (messages) {
+      if (filter === "URGENT") {
+        console.log("URGENT")
+        filtered = {}
+        Object.keys(messages).forEach((item) => {
+          if (messages[item].isRead == false && messages[item].type === "urgent") {
+            filtered[item] = messages[item]
+          }
+        });
+      } else {
+        console.log("DEFAULT")
+        Object.keys(filtered).forEach((item) => {
+          if (filtered[item].isRead == true) {
+            delete filtered[item];
+          }
+        });
+      }
     }
-    return messages;
+    console.log(filtered)
+    return filtered;
   }
 )
