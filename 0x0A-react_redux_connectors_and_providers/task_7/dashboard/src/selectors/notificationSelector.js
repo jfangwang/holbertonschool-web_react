@@ -8,11 +8,14 @@ export const getNotifications = (state) => {
   return (Map(notifications));
 }
 export const getUnreadNotifications = (state) => {
-  const notifications = state.get('notifications').toJS();
-  Object.keys(notifications).forEach((item) => {
-    if (notifications[item].isRead == true) {
-      delete notifications[item];
+  const notifications = state.notifications.get('messages')
+  let filtered = notifications
+  if (notifications) {
+    Object.keys(filtered).forEach((item) => {
+    if (filtered[item].isRead == true) {
+      delete filtered[item];
     }
   });
-  return (Map(notifications));
+  }
+  return (filtered);
 }

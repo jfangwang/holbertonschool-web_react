@@ -4,4 +4,4 @@ export const getListCourses = (state) => {
     return courses.valueSeq();
   }
   return courses;
-}
+};

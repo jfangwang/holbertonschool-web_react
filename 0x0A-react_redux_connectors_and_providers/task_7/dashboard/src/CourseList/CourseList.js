@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import CourseListRow from './CourseListRow';
+import { connect } from "react-redux";
 // import './CourseList.css';
-// import CourseShape from './CourseShape';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
-import { connect } from 'react-redux';
-import { getListCourses } from '../selectors/courseSelector'
 import { fetchCourses, selectCourse, unSelectCourse } from '../actions/courseActionCreators';
+import { getListCourses } from '../selectors/courseSelector';
+
 
 const styles = StyleSheet.create({
   table: {
@@ -38,7 +38,7 @@ export class CourseList extends Component {
     this.onChangeRow = this.onChangeRow.bind(this);
   }
   componentDidMount() {
-    this.props.fetchCourses()
+    this.props.fetchCourses();
   }
   onChangeRow(id, checked) {
     if (checked) {
@@ -48,8 +48,7 @@ export class CourseList extends Component {
     }
   }
   render() {
-    const { listCourses } = this.props;
-  
+    const {listCourses} = this.props;
     return (
       <table className={css(styles.table)}>
         <thead className={css(styles.thead, styles.thead.tr)}>
@@ -79,22 +78,24 @@ export class CourseList extends Component {
     )
   }
 }
-CourseList.propTypes = {
-  listCourses: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  fetchCourses: PropTypes.func,
-  selectCourse: PropTypes.func,
-  unSelectCourse: PropTypes.func,
-}
 CourseList.defaultProps = {
   listCourses: null,
   fetchCourses: () => {},
   selectCourse: () => {},
   unSelectCourse: () => {},
-}
-export const mapStateToProps = (state) => {
-  const courseList = getListCourses(state);
+};
+
+CourseList.propTypes = {
+  listCourses: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  fetchCourses: PropTypes.func,
+  selectCourse: PropTypes.func,
+  unSelectCourse: PropTypes.func,
+};
+
+const mapStateToProps = (state) => {
+  const list = getListCourses(state);
   return {
-    listCourses: courseList,
+    listCourses: list,
   }
 }
 
@@ -103,4 +104,5 @@ const mapDispatchToProps = {
   selectCourse,
   unSelectCourse,
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(CourseList);

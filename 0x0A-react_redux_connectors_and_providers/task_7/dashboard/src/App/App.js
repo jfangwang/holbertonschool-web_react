@@ -10,33 +10,20 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
-import { defaultUser, AppContext } from './AppContext';
+import {defaultUser, AppContext} from './AppContext';
 import { connect } from 'react-redux';
-import { displayNotificationDrawer, hideNotificationDrawer, loginRequest, logout } from '../actions/uiActionCreators';
+import { displayNotificationDrawer, hideNotificationDrawer, loginRequest } from '../actions/uiActionCreators';
 
 const courses = [
-  { id: 1, name: "ES6", credit: 60 },
-  { id: 2, name: "Webpack", credit: 20 },
-  { id: 3, name: "React", credit: 40 }
+  {id: 1, name: "ES6", credit: 60},
+  {id: 2, name: "Webpack", credit: 20},
+  {id: 3, name: "React", credit: 40}
 ]
-export const listNotificationsInitialState = [
-  { id: 1, type: "default", value: "New course available" },
-  { id: 2, type: "urgent", value: "New resume available" },
-  { id: 3, type: "urgent", html: { __html: getLatestNotification() } }
-]
-{/* <NotificationItem type='default' value='New course available'></NotificationItem>
-    <NotificationItem type='urgent' value='New resume available'></NotificationItem>
-    <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem> */}
-// const notificationsList = [
-//   {id: 1, type: "default", value: "New course available"},
-//   {id: 2, type: "urgent", value: "New resume available"},
-//   {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
-// ]
 const styles = StyleSheet.create({
   App: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    top:0,
+    left:0,
     margin: 0,
     padding: 0,
     display: 'flex',
@@ -49,33 +36,31 @@ const styles = StyleSheet.create({
   }
 });
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false,
       user: defaultUser,
-      logOut: () => { this.setState({ user: defaultUser }) },
-      // listNotifications: [
-      //   {id: 1, type: "default", value: "New course available"},
-      //   {id: 2, type: "urgent", value: "New resume available"},
-      //   {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
-      // ]
+      logOut: () => {this.setState({user: defaultUser})},
+      listNotifications: [
+        {id: 1, type: "default", value: "New course available"},
+        {id: 2, type: "urgent", value: "New resume available"},
+        {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
+      ]
     }
     // this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
     // this.handleHideDrawer = this.handleHideDrawer.bind(this)
-    this.logIn = this.logIn.bind(this)
+    // this.logIn = this.logIn.bind(this)
     // this.markNotificationAsRead = this.markNotificationAsRead.bind(this)
   }
-  logIn(email, password) {
-    this.setState({
-      user: {
-        email,
-        password,
-        isLoggedIn: true
-      }
-    })
-  }
+  // logIn(email, password) {
+  //   this.setState({
+  //     user: {
+  //       email,
+  //       password,
+  //     }
+  //   })
+  // }
   // handleDisplayDrawer() {
   //   this.setState({
   //     displayDrawer: true
@@ -95,53 +80,50 @@ class App extends React.Component {
       this.state.logOut();
     }
   }
-  markNotificationAsRead(id) {
-    const new_list = [];
-    this.state.listNotifications.forEach((item) => {
-      if (item.id !== id) {
-        new_list.push(item);
-      }
-    })
-    this.setState({ listNotifications: new_list })
-  }
+  // markNotificationAsRead(id) {
+  //   const new_list = [];
+  //   this.state.listNotifications.forEach((item) => {
+  //     if (item.id !== id) {
+  //       new_list.push(item);
+  //     }
+  //   })
+  //   this.setState({listNotifications: new_list})
+  // }
   componentDidMount() {
     document.addEventListener('keypress', this.handleLogout(this.state.logOut));
   }
 
   render() {
-    const { isLoggedIn } = this.state.user;
-    const { user, logOut } = this.state;
-    const { displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props
-
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, login } = this.props
+    const {user, logOut} = this.state;
     return (
       /* Short Hand version of <React.Fragment> */
       <>
-        <AppContext.Provider value={{ user, logOut }}>
+        <AppContext.Provider value={{user, logOut}}>
           <Notifications
             listNotifications={this.state.listNotifications}
             displayDrawer={displayDrawer}
             handleDisplayDrawer={displayNotificationDrawer}
             handleHideDrawer={hideNotificationDrawer}
-            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
-            <Header />
+            <Header/>
             <div className="App-body">
               {isLoggedIn ?
-                <BodySectionWithMarginBottom title="Course list">
-                  <CourseList listCourses={courses} />
-                </BodySectionWithMarginBottom>
-                :
-                <BodySectionWithMarginBottom title="Log in to continue">
-                  <Login logIn={this.logIn} />
-                </BodySectionWithMarginBottom>
+              <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={courses}/>
+              </BodySectionWithMarginBottom>
+              :
+              <BodySectionWithMarginBottom title="Log in to continue">
+              <Login logIn={login}/>
+              </BodySectionWithMarginBottom>
               }
               <BodySection title="News from the School">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </BodySection>
             </div>
             <div className={css(styles.footer)}>
-              <Footer />
+              <Footer/>
             </div>
           </div>
         </AppContext.Provider>
@@ -150,31 +132,27 @@ class App extends React.Component {
   }
 }
 App.propTypes = {
-  isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
   displayDrawer: PropTypes.bool,
+  displayNotificationDrawer: () => {},
+  hideNotificationDrawer: () => {},
+}
+App.defaultProps = {
+  logOut: () => null,
+  displayDrawer: false,
   displayNotificationDrawer: PropTypes.func,
   hideNotificationDrawer: PropTypes.func,
 }
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => null,
-  displayDrawer: false,
-  displayNotificationDrawer: () => { },
-  hideNotificationDrawer: () => { },
-}
-export const mapStateToProps = (state) => {
+export function mapStateToProps(state) {
   return {
     isLoggedIn: state.ui.get('isUserLoggedIn'),
     displayDrawer: state.ui.get('isNotificationDrawerVisible'),
   }
 }
-
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
   login: loginRequest,
-  logout,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

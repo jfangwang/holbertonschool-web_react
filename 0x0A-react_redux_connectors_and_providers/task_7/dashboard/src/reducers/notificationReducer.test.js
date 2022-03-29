@@ -36,7 +36,7 @@ const expectedData = {
     },
     "2" : {
       id: 2,
-      isRead: false,
+      isRead: true,
       type: "urgent",
       value: "New resume available"
     },
@@ -60,7 +60,7 @@ const expectedChange = {
     },
     "2" : {
       id: 2,
-      isRead: true,
+      isRead: false,
       type: "urgent",
       value: "New resume available"
     },
@@ -77,10 +77,6 @@ describe('Tests for courseReducer', () => {
   it('Should (when no action is passed) return initialState', () => {
     expect(notificationReducer(undefined, {}).toJS()).toEqual(initialState);
   });
-  it('Should return expectedChange when { type: MARK_AS_READ, index: (int) } is passed', () => {
-    const state = expectedData;
-    expect(notificationReducer(fromJS(state), { type: 'MARK_AS_READ', index: 2 }).toJS()).toEqual(expectedChange);
-  })
   it('Should return expectedData with filter: "URGENT" { type: SET_TYPE_FILTER, filter: "URGENT" } is passed', () => {
     const state = expectedData;
     expect(notificationReducer(fromJS(state), { type: 'SET_TYPE_FILTER', filter: "URGENT"}).toJS()).toEqual({...expectedData, filter: "URGENT" });

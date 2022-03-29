@@ -1,6 +1,6 @@
 import { selectCourse, unSelectCourse, setCourses, fetchCourses } from './courseActionCreators';
 import { SELECT_COURSE, UNSELECT_COURSE } from './courseActionTypes';
-import fetchMock from 'fetch-mock'
+import fetchMock from "fetch-mock";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 const middlewares = [thunk];
@@ -15,7 +15,7 @@ describe('courseActionCreator Test Suite', () => {
     const test = unSelectCourse(1)
     expect(test).toEqual({type: UNSELECT_COURSE, index: 1});
   });
-  it('fetch is working correctly', () => {
+  it("Fetch is working", function () {
     const store = mockStore({});
     fetchMock.restore();
     fetchMock.get("./courses.json", "{}");
@@ -23,5 +23,5 @@ describe('courseActionCreator Test Suite', () => {
       const actions = store.getActions();
       expect(actions[0]).toEqual(setCourses({}));
     });
-  })
+  });
 })
