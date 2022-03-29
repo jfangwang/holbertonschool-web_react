@@ -3,33 +3,31 @@ import {getFullYear, getFooterCopy} from '../utils/utils';
 import logo from '../assets/Holberton_Logo.jpg';
 import './Footer.css';
 import { AppContext } from '../App/AppContext';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import PropTypes from "prop-types";
 
-export default function Footer() {
+export function Footer({user}) {
+  console.log(user)
   return (
-    <AppContext.Consumer>
-      {({user, logOut}) => (
-        <div className="App-footer">
+      <div className="App-footer">
           <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
-          {user.isLoggedIn && <p><a>Contact us</a></p>}
+          {user && <p><a href="#">Contact us</a></p>}
       </div>
-      )}
-    </AppContext.Consumer>
   );
 }
 
 Footer.defaultProps = {
-  user:null,
-}
+  user: null,
+};
 
 Footer.propTypes = {
   user: PropTypes.object,
-}
+};
+
 
 const mapStateToProps = (state) => {
   return {
-    user: state.get('user'),
-  }
+    user: state.get('user')
+  };
 }
-connect(mapStateToProps, null)(Footer);
+export default connect(mapStateToProps)(Footer);

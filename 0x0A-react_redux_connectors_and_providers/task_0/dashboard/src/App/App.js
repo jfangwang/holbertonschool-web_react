@@ -103,7 +103,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state.user;
+    const { isLoggedIn } = this.props
     const {user, logOut} = this.state;
     return (
       /* Short Hand version of <React.Fragment> */
@@ -153,5 +153,5 @@ export function mapStateToProps(state) {
   }
 }
 
-connect(mapStateToProps)(App);
-export default (App);
+
+export default connect(mapStateToProps)(App);

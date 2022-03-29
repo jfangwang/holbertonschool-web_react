@@ -1,10 +1,14 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React, { Component } from 'react';
 import logo from '../assets/Holberton_Logo.jpg';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from '../App/AppContext';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logout } from '../actions/uiActionCreators';
+import PropTypes from 'prop-types';
+import { logout } from '../actions/uiActionCreators'
 
 const styles = StyleSheet.create({
   AppLogo: {
@@ -27,39 +31,39 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends Component {
+export class Header extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    let value = this.context;
-    const { user, logout } = this.props;
+    const {user, logout} = this.props
     return (
       <>
         <div className={css(styles.AppHeader)}>
           <img src={logo} className={css(styles.AppLogo)} alt="holberton logo" />
           <h1>School Dashboard</h1>
         </div>
-        { value.user.isLoggedIn && (
+        { user && (
           <div className={css(styles.welcome)} id='logoutSection'>
-            welcome <b>{value.user.email}</b> <a className={css(styles.logout)} onClick={value.logOut}>(logout)</a>
+            welcome <b>{user.email}</b> <a className={css(styles.logout)} onClick={logout}>(logout)</a>
           </div>
         )}
       </>
     );
   }
 }
+
 Header.contextType = AppContext;
+
+Header.defaultProps = {
+  user: null,
+  logout: () => {},
+};
 
 Header.propTypes = {
   user: PropTypes.object,
   logout: PropTypes.func,
-}
-
-Header.defaultProps = {
-  user: null,
-  logout: () => {}
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -69,7 +73,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   logout,
-}
+};
 
-connect(mapStateToProps, mapDispatchToProps);
-export default Header;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

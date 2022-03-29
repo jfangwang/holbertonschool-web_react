@@ -19,14 +19,6 @@ const courses = [
   {id: 2, name: "Webpack", credit: 20},
   {id: 3, name: "React", credit: 40}
 ]
-{/* <NotificationItem type='default' value='New course available'></NotificationItem>
-    <NotificationItem type='urgent' value='New resume available'></NotificationItem>
-    <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem> */}
-// const notificationsList = [
-//   {id: 1, type: "default", value: "New course available"},
-//   {id: 2, type: "urgent", value: "New resume available"},
-//   {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
-// ]
 const styles = StyleSheet.create({
   App: {
     position: 'absolute',
@@ -48,7 +40,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false,
       user: defaultUser,
       logOut: () => {this.setState({user: defaultUser})},
       listNotifications: [
@@ -67,7 +58,6 @@ class App extends React.Component {
       user: {
         email,
         password,
-        isLoggedIn: true
       }
     })
   }
@@ -104,10 +94,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state.user;
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props
     const {user, logOut} = this.state;
-    const { displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props
-  
     return (
       /* Short Hand version of <React.Fragment> */
       <>
@@ -145,27 +133,26 @@ class App extends React.Component {
   }
 }
 App.propTypes = {
-  isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
   displayDrawer: PropTypes.bool,
-  displayNotificationDrawer: PropTypes.func,
-  hideNotificationDrawer: PropTypes.func,
-}
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => null,
-  displayDrawer: false,
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
 }
-export const mapStateToProps = (state) => {
+App.defaultProps = {
+  logOut: () => null,
+  displayDrawer: false,
+  displayNotificationDrawer: PropTypes.func,
+  hideNotificationDrawer: PropTypes.func,
+}
+export function mapStateToProps(state) {
   return {
     isLoggedIn: state.get('isUserLoggedIn'),
-    displayDrawer: state.get('isNotificationDrawerVisible'),
+    displayDrawer: state.get('isNotificationDrawerVisible')
   }
 }
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
