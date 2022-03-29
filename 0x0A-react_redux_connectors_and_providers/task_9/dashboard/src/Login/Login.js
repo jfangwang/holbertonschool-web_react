@@ -1,103 +1,60 @@
-import React, { Component } from "react";
-import { StyleSheet, css } from "aphrodite";
+import React, {Component} from 'react';
+import {getFullYear, getFooterCopy} from '../utils/utils';
+import logo from '../assets/Holberton_Logo.jpg';
+import { StyleSheet, css } from 'aphrodite';
+
+const styles = StyleSheet.create({
+  label: {
+    padding: '8px 4px 8px 4px',
+  }
+});
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       enableSubmit: false,
-    };
+    }
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this)
   }
-
-  handleLoginSubmit(event) {
-    event.preventDefault();
-
-    const { email, password } = this.state;
-
-    this.props.logIn(email, password);
+  handleLoginSubmit(e) {
+    e.preventDefault();
+    this.props.logIn(this.state.email, this.state.password);
   }
-
-  handleChangeEmail(event) {
-    const { value } = event.target;
-    const { password } = this.state;
-
-    if (value !== "" && password !== "") this.setState({ enableSubmit: true });
-    else this.setState({ enableSubmit: false });
-
-    this.setState({ email: event.target.value });
+  handleChangeEmail(e) {
+    if (e.target.value === '' || this.state.password === '') {
+      this.setState({enableSubmit: false})
+    } else {
+      this.setState({enableSubmit: true})
+    }
+    this.setState({email: e.target.value})
   }
-
-  handleChangePassword(event) {
-    const { value } = event.target;
-    const { email } = this.state;
-
-    if (email !== "" && value !== "") this.setState({ enableSubmit: true });
-    else this.setState({ enableSubmit: false });
-
-    this.setState({ password: event.target.value });
+  handleChangePassword(e) {
+    if (e.target.value === '' || this.state.email === '') {
+      this.setState({enableSubmit: false})
+    } else {
+      this.setState({enableSubmit: true})
+    }
+    this.setState({password: e.target.value})
   }
-
   render() {
     return (
-      <div className={css(styles.login)}>
-        <p>Login to access the full dashboard</p>
-        <form action="" onSubmit={this.handleLoginSubmit}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className={css(styles.loginInput)}
-            value={this.state.email}
-            onChange={this.handleChangeEmail}
-          />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className={css(styles.loginInput)}
-            value={this.state.password}
-            onChange={this.handleChangePassword}
-          />
-          <input type="submit" disabled={!this.state.enableSubmit} />
-        </form>
-      </div>
-    );
+      <>
+      <p>Login to access the full dashboard</p>
+      <form onSubmit={this.handleLoginSubmit}>
+        <label className={css(styles.label)} htmlFor="email">Email</label>
+        <input id="email" type="email" value={this.state.email} onChange={this.handleChangeEmail}/>
+        <label className={css(styles.label)} htmlFor="password">Password</label>
+        <input id="password" type="password" value={this.state.password} onChange={this.handleChangePassword}/>
+        <button type="submit" id="ok_button" disabled={!this.state.enableSubmit}>OK</button>
+      </form>
+    </>
+    )
   }
 }
 
-const screenSize = {
-  small: "@media screen and (max-width: 900px)",
-};
-
-const styles = StyleSheet.create({
-  login: {
-    margin: "50px",
-    flexGrow: 1,
-    [screenSize.small]: {
-      marginTop: "10px",
-      marginLeft: 0,
-      marginRight: 0,
-      marginBottom: 0,
-    },
-  },
-
-  loginInput: {
-    marginLeft: "10px",
-    marginRight: "20px",
-    [screenSize.small]: {
-      display: "block",
-      marginLeft: 0,
-      marginTop: "10px",
-      marginBottom: "10px",
-    },
-  },
-});
-
-export default Login;
+export default Login

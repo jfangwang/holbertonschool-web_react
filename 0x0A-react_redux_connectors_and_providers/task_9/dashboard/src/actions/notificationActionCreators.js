@@ -2,51 +2,47 @@ import {
   MARK_AS_READ,
   SET_TYPE_FILTER,
   SET_LOADING_STATE,
-  FETCH_NOTIFICATIONS_SUCCESS,
+  NotificationTypeFilters,
+  FETCH_NOTIFICATIONS_SUCCESS
 } from "./notificationActionTypes";
 
-import "node-fetch";
-
-export const markAsAread = (index) => {
+export function markAsAread(index) {
   return {
     type: MARK_AS_READ,
     index,
-  };
-};
-
-export const boundMarkAsAread = (index) => dispatch(markAsAread(index));
-
-export const setNotificationFilter = (filter) => {
+  }
+}
+export function boundMarkAsAread(index) {
+  dispatch(markAsAread(index));
+}
+export function setNotificationFilter(filter) {
   return {
     type: SET_TYPE_FILTER,
     filter,
-  };
-};
-
-export const boundSetNotificationFilter = (filter) =>
+  }
+}
+export function boundSetNotificationFilter(filter) {
   dispatch(setNotificationFilter(filter));
-
-export const setLoadingState = (loading) => {
+}
+export function setLoadingState(loading) {
   return {
     type: SET_LOADING_STATE,
     loading,
-  };
-};
-
-export const setNotifications = (data) => {
+  }
+}
+export function setNotifications(data) {
   return {
     type: FETCH_NOTIFICATIONS_SUCCESS,
     data,
-  };
-};
-
-export const fetchNotifications = () => {
+  }
+}
+export function fetchNotifications() {
   return (dispatch) => {
     dispatch(setLoadingState(true));
-    return fetch("./notifications.json")
-      .then((res) => res.json())
+    return fetch('./notifications.json')
+      .then((r) => r.json())
       .then((data) => dispatch(setNotifications(data)))
-      .catch((error) => {})
+      .catch((err) => console.log("Error from fetching notifications: ", err))
       .finally(() => dispatch(setLoadingState(false)));
-  };
-};
+  }
+}

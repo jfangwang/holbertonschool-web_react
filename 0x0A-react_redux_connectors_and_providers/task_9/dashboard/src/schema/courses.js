@@ -1,11 +1,20 @@
-import { normalize, schema } from "normalizr";
+import { normalize, schema } from 'normalizr';
 
-const courses = new schema.Entity("courses");
+// adds isSelected property to for every new notification object in data
+const coursesProcessStrategy = (value) => {
+    return {
+      ...value,
+      isSelected: false
+    }
+}
 
-const coursesNormalizer = (data) => {
+const courses = new schema.Entity('courses', {}, {
+  processStrategy: coursesProcessStrategy
+})
+
+function coursesNormalizer (data) {
   const normalizedData = normalize(data, [courses]);
+  return ( normalizedData.entities.courses );
+}
 
-  return normalizedData.entities.courses;
-};
-
-export default coursesNormalizer;
+export { coursesNormalizer };

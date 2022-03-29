@@ -1,64 +1,57 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { logout } from "../actions/uiActionCreators";
-import PropTypes from "prop-types";
-import { StyleSheet, css } from "aphrodite";
-import AppContext from "../App/AppContext";
-import holberton_logo from "../assets/holberton_logo.jpg";
+/**
+ * @jest-environment jsdom
+ */
+
+import React, { Component } from 'react';
+import logo from '../assets/Holberton_Logo.jpg';
+import { StyleSheet, css } from 'aphrodite';
+import { AppContext } from '../App/AppContext';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../actions/uiActionCreators'
+
+const styles = StyleSheet.create({
+  AppLogo: {
+    height: '25vh'
+  },
+  AppHeader: {
+    justifyContent: 'left',
+    alignItems: 'center',
+    color: 'var(--red)',
+    borderBottom: '4px red solid',
+    flexDirection: 'row',
+    textAlign: 'center',
+    display: 'flex'
+  },
+  logout: {
+    cursor: 'pointer',
+  },
+  welcome: {
+    margin: '1rem 0 0 0',
+  },
+});
 
 export class Header extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
-    const { user, logout } = this.props;
-
+    const {user, logout} = this.props
     return (
-      <div className={css(styles.header)}>
-        <img src={holberton_logo} className={css(styles.headerImg)} />
-        <h1>School dashboard</h1>
-
-        {user && (
-          <p id="logoutSection" className={css(styles.logoutSection)}>
-            Welcome <b>{`${user.email} `}</b>
-            <span onClick={logout} className={css(styles.logoutSectionSpan)}>
-              (logout)
-            </span>
-          </p>
+      <>
+        <div className={css(styles.AppHeader)}>
+          <img src={logo} className={css(styles.AppLogo)} alt="holberton logo" />
+          <h1>School Dashboard</h1>
+        </div>
+        { user && (
+          <div className={css(styles.welcome)} id='logoutSection'>
+            welcome <b>{user.email}</b> <a className={css(styles.logout)} onClick={logout}>(logout)</a>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }
-
-const cssVars = {
-  mainColor: "#e01d3f",
-};
-
-const styles = StyleSheet.create({
-  header: {
-    display: "flex",
-    alignItems: "center",
-    color: cssVars.mainColor,
-    fontSize: "20px",
-  },
-
-  headerImg: {
-    width: "200px",
-  },
-  logoutSection: {
-    color: "black",
-    position: "absolute",
-    right: 0,
-    paddingRight: "20px",
-    alignSelf: "flex-end",
-  },
-  logoutSectionSpan: {
-    fontStyle: "italic",
-    cursor: "pointer",
-  },
-});
 
 Header.contextType = AppContext;
 
@@ -74,14 +67,13 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.ui.get("user"),
-  };
-};
+    user: state.ui.get('user'),
+  }
+}
 
 const mapDispatchToProps = {
   logout,
 };
 
-// export default Header;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

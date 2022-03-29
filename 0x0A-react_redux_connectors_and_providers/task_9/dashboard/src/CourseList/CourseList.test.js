@@ -2,6 +2,7 @@ import { shallow } from "enzyme";
 import React from "react";
 import { CourseList } from "./CourseList";
 import { StyleSheetTestUtils } from "aphrodite";
+import { fetchCourses, selectCourse, unSelectCourse } from '../actions/courseActionCreators';
 
 describe("<CourseList />", () => {
   let listCourses;
@@ -14,7 +15,7 @@ describe("<CourseList />", () => {
   });
 
   it("CourseList renders without crashing", () => {
-    const wrapper = shallow(<CourseList />);
+    const wrapper = shallow(<CourseList fetchCourses={fetchCourses}/>);
     expect(wrapper.exists()).toEqual(true);
   });
 
@@ -28,7 +29,7 @@ describe("<CourseList />", () => {
     });
 
     it("it renders the 5 different rows", () => {
-      const wrapper = shallow(<CourseList listCourses={listCourses} />);
+      const wrapper = shallow(<CourseList listCourses={listCourses} fetchCourses={fetchCourses}/>);
       wrapper.update();
       const item = wrapper.find("CourseListRow");
 

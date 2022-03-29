@@ -1,34 +1,30 @@
-import uiReducer, { initialUiState } from "./uiReducer";
-import { LOGIN, DISPLAY_NOTIFICATION_DRAWER } from "../actions/uiActionTypes";
+import { uiReducer } from "./uiReducer";
+import { LOGIN } from "../actions/uiActionTypes";
 
-const USER = { email: "larry@hudson.com", password: "123456" };
+const defaultState = {
+  user: null,
+  isUserLoggedIn: false,
+  isNotificationDrawerVisible: false
+}
+const USER = { email: "asdf@gmail.com", password: 'willy'}
 
-describe("uiReducer tests", function () {
-  it("verifies the state returned by the uiReducer function equals the initial state when no action is passed", function () {
-    const state = uiReducer(undefined, {});
-
-    expect(state.toJS()).toEqual(initialUiState);
-  });
-  it("verifies the state returned by the uiReducer function equals the initial state when the action SELECT_COURSE is passed", function () {
-    const state = uiReducer(undefined, { type: "SELECT_COURSE" });
-
-    expect(state.toJS()).toEqual(initialUiState);
-  });
-  it("verifies the state returned by the uiReducer function, when the action DISPLAY_NOTIFICATION_DRAWER is passed, changes correctly the isNotificationDrawerVisible property", function () {
-    const state = uiReducer(undefined, { type: DISPLAY_NOTIFICATION_DRAWER });
-
-    expect(state.toJS()).toEqual({
-      ...initialUiState,
-      isNotificationDrawerVisible: true,
-    });
-  });
-
-  it("verifies the state returned by the uiReducer function, when the action LOGIN is passed, changes correctly the user property", function () {
+describe("Reducers Test Suite", () => {
+  it("Equals initial state with no action passed", () => {
+    expect(uiReducer(undefined, {}).toJS()).toEqual(defaultState);
+  })
+  it("Equals state with action", () => {
+    expect(uiReducer(undefined, {type: "SELECT_COURSE"}).toJS()).toEqual(defaultState)
+  })
+  it("Action display drawer is passed", () => {
+    const update = {...defaultState, isNotificationDrawerVisible: true}
+    expect(uiReducer(undefined, {type: "DISPLAY_NOTIFICATION_DRAWER"}).toJS()).toEqual(update)
+  })
+  it("State is reuturned when LOGIN is passed, changes correctly the user property", function () {
     const state = uiReducer(undefined, { type: LOGIN, user: USER });
 
     expect(state.toJS()).toEqual({
-      ...initialUiState,
+      ...defaultState,
       user: USER,
     });
   });
-});
+})
