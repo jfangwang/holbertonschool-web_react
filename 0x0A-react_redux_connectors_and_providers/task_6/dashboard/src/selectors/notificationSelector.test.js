@@ -57,15 +57,4 @@ describe('notification selectors test suite', () => {
     expect(isMap(getNotifications(fromJS(state)))).toBe(true);
     expect(getNotifications(fromJS(state)).toJS()).toEqual(state.notifications);
   });
-  it('return the current states unread notifications', () => {
-    const expectedUnreadNotifications = {
-      1: {
-        id: 1,
-        isRead: false,
-        type: "default",
-        value: "New course available"
-      }
-    }
-    expect(getUnreadNotifications(fromJS(stateWithUnread)).toJS()).toEqual(expectedUnreadNotifications);
-  });
 })

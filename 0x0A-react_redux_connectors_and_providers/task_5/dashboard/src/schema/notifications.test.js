@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { getAllNotificationsByUser, normalizer } from './notifications';
+import { getAllNotificationsByUser, normalizedData } from './notifications';
 
 const dummy = [
   {
@@ -48,7 +48,7 @@ describe('App Test Suite', () => {
   });
 
   it('normalizr is working', () => {
-    const test = normalizer.result;
+    const test = normalizedData.result;
     expect(test).toEqual(expect.arrayContaining(result));
   });
 
@@ -60,7 +60,7 @@ describe('App Test Suite', () => {
       name: { first: "Poole", last: "Sanders" },
       picture: "http://placehold.it/32x32"
     }
-    const test = normalizer.entities.users['5debd764a7c57c7839d722e9'];
+    const test = normalizedData.entities.users['5debd764a7c57c7839d722e9'];
     expect(test).toEqual(user);
   });
 
@@ -71,7 +71,7 @@ describe('App Test Suite', () => {
       type: "default",
       value: "Cursus risus at ultrices mi."
     }
-    const test = normalizer.entities.messages['efb6c485-00f7-4fdf-97cc-5e12d14d6c41'];
+    const test = normalizedData.entities.messages['efb6c485-00f7-4fdf-97cc-5e12d14d6c41'];
     expect(test).toEqual(message);
   });
 
@@ -81,7 +81,7 @@ describe('App Test Suite', () => {
       context: "3068c575-d619-40af-bf12-dece1ee18dd3",
       id: "5debd7642e815cd350407777"
     }
-    const test = normalizer.entities.notifications['5debd7642e815cd350407777'];
+    const test = normalizedData.entities.notifications['5debd7642e815cd350407777'];
     expect(test).toEqual(notification);
   });
 })
