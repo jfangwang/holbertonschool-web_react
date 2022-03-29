@@ -12,21 +12,13 @@ import BodySection from '../BodySection/BodySection';
 import { StyleSheet, css } from 'aphrodite';
 import {defaultUser, AppContext} from './AppContext';
 import { connect } from 'react-redux';
-import { displayNotificationDrawer, hideNotificationDrawer, loginRequest, logout } from '../actions/uiActionCreators';
+import { displayNotificationDrawer, hideNotificationDrawer, loginRequest } from '../actions/uiActionCreators';
 
 const courses = [
   {id: 1, name: "ES6", credit: 60},
   {id: 2, name: "Webpack", credit: 20},
   {id: 3, name: "React", credit: 40}
 ]
-{/* <NotificationItem type='default' value='New course available'></NotificationItem>
-    <NotificationItem type='urgent' value='New resume available'></NotificationItem>
-    <NotificationItem type='urgent' html={{ __html: getLatestNotification() }}></NotificationItem> */}
-// const notificationsList = [
-//   {id: 1, type: "default", value: "New course available"},
-//   {id: 2, type: "urgent", value: "New resume available"},
-//   {id: 3, type: "urgent", html: {__html: getLatestNotification()}}
-// ]
 const styles = StyleSheet.create({
   App: {
     position: 'absolute',
@@ -44,11 +36,10 @@ const styles = StyleSheet.create({
   }
 });
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false,
       user: defaultUser,
       logOut: () => {this.setState({user: defaultUser})},
       listNotifications: [
@@ -59,18 +50,17 @@ class App extends React.Component {
     }
     // this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
     // this.handleHideDrawer = this.handleHideDrawer.bind(this)
-    this.logIn = this.logIn.bind(this)
+    // this.logIn = this.logIn.bind(this)
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this)
   }
-  logIn(email, password) {
-    this.setState({
-      user: {
-        email,
-        password,
-        isLoggedIn: true
-      }
-    })
-  }
+  // logIn(email, password) {
+  //   this.setState({
+  //     user: {
+  //       email,
+  //       password,
+  //     }
+  //   })
+  // }
   // handleDisplayDrawer() {
   //   this.setState({
   //     displayDrawer: true
@@ -104,10 +94,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state.user;
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, login } = this.props
     const {user, logOut} = this.state;
-    const { displayDrawer, displayNotificationDrawer, hideNotificationDrawer } = this.props
-  
     return (
       /* Short Hand version of <React.Fragment> */
       <>
@@ -128,7 +116,7 @@ class App extends React.Component {
               </BodySectionWithMarginBottom>
               :
               <BodySectionWithMarginBottom title="Log in to continue">
-              <Login logIn={this.logIn}/>
+              <Login logIn={login}/>
               </BodySectionWithMarginBottom>
               }
               <BodySection title="News from the School">
@@ -145,31 +133,27 @@ class App extends React.Component {
   }
 }
 App.propTypes = {
-  isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
   displayDrawer: PropTypes.bool,
-  displayNotificationDrawer: PropTypes.func,
-  hideNotificationDrawer: PropTypes.func,
-}
-App.defaultProps = {
-  isLoggedIn: false,
-  logOut: () => null,
-  displayDrawer: false,
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
 }
-export const mapStateToProps = (state) => {
+App.defaultProps = {
+  logOut: () => null,
+  displayDrawer: false,
+  displayNotificationDrawer: PropTypes.func,
+  hideNotificationDrawer: PropTypes.func,
+}
+export function mapStateToProps(state) {
   return {
     isLoggedIn: state.ui.get('isUserLoggedIn'),
     displayDrawer: state.ui.get('isNotificationDrawerVisible'),
   }
 }
-
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
   login: loginRequest,
-  logout,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
